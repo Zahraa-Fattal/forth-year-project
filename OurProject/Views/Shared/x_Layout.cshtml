@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Swessral</title>
+
+</head>
+<body>
+    <header style="background-color: #000133">
+        <div class="container mb-2 ">
+            <nav class="navbar navbar-expand-lg navbar-dark pl-0" style="background-color: transparent">
+                <div class="container-fluid">
+                    <div>
+                        <img src="~/img/user.jpg" alt="logo" style=" width: 4rem;" class="img-fluid pr-1 pl-1">
+                        <a class="navbar-brand " asp-area="" asp-controller="Home" asp-action="Index"><span class="text-primary font-weight-bold fs-4">S</span>wessral</a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-right">
+                            <li class="nav-item">
+                                <a class="nav-link  " aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">أمين مستودع</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">مشرف</a>
+                            </li>
+
+                        </ul>
+                        <div class="nav__icons pl-2">
+                            <a href="#" class="nav__icon pr-1"><i class='bx bxs-user'></i></a>
+
+                            <a class="nav__icon" asp-action="HomeBtn" asp-controller="Maneger"><i class='bx bxs-home'></i></a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container overflow-auto">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    @*<footer class="border-top footer text-muted ">
+        <div class="container">
+            &copy; 2021 - Swessral - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>*@
+</body>
+</html>

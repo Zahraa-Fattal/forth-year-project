@@ -1,0 +1,94 @@
+﻿@model IEnumerable<OurProject.Dto.UnitDto.GetAllUnitsInfoDto>
+@{
+    ViewData["Title"] = "MainManegerView";
+    Layout = "~/Views/Shared/Maneger/Maneger_Layout.cshtml";
+
+}
+
+
+<form dir="rtl" >
+    <div class="container" style="margin-top: 3%; ">
+        <div style="display:flex;justify-content:center;">
+            <button type="submit" class="button" style="color: #355cc9;margin-right: 20px; font-size:20px" asp-controller="Maneger" asp-action="StartDeleteStudents">البدء بعملية المغادرة</button>
+            <button type="submit" class="button"  style="color: #355cc9; font-size: 20px"  asp-controller="Maneger" asp-action="EndDeleteStudents">أنهاء عملية المغادرة</button>
+        </div>
+        <div class="row overflow-hidden">
+
+            @foreach (var item in Model)
+            {
+                int i = item.UnitId;
+                string cardid = "card" + i;
+                <div class=" col-sm-12 col-md-6 col-lg-4 pl-0" style="padding-left: 0rem; padding-right: 1.4rem;">
+                    <div  class="card "style="width:95% !important">
+                        <input type="checkbox" id="@cardid" class="more" aria-hidden="true">
+                        <div class="content">
+                            <div class="front" style="background-image: url(@item.Image)" >
+                                <div class="inner">
+                                    <h2>@item.UnitName</h2>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <label for="@cardid" class="button" aria-hidden="true">
+                                        تفاصيل
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="inner" dir="ltr">
+                                    <table class="table__1 caption-top" style="text-align: right;">
+                                        <tbody>
+                                            <tr>
+                                                <td class="pr-3" style="padding-bottom:1rem;">@item.SuperVisorName</td>
+                                                <th scope="row" style="padding-bottom: 1rem; width: 8rem;">:المشرف</th>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="pr-4" style="padding-bottom:1rem;">@item.StoreKeeperName</td>
+                                                <th scope="row" style="padding-bottom: 1rem; width: 8rem;">:امين المستودع</th>
+                                            </tr>
+                                            <tr>
+                                                <td class=" pr-4" style="padding-bottom:1rem;">@item.StudentCount</td>
+                                                <th scope="row" style="padding-bottom: 1rem; width: 8rem;">:عدد الطلاب</th>
+                                            </tr>
+                                            <tr>
+                                                <td class=" pr-4" style="padding-bottom:1rem;">@item.studyBrancheName</td>
+                                                <th scope="row" style="padding-bottom: 1rem; width: 8rem;">:الفرع الدراسي</th>
+                                            </tr>
+                                            <tr>
+                                                @if (item.Gender)
+                                                {
+                                                    <td class=" pr-4">ذكور</td>
+                                                }
+                                                else
+                                                {
+                                                    <td class=" pr-4">إناث</td>
+                                                }
+                                                <th scope="row" style="width:8rem;">:ذكور / اناث</th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
+                                    <label for="@cardid" class="button return" aria-hidden="true" style="margin-right: 85%; background-color: #90AAB9;">
+                                        <i class='bx bx-left-arrow-alt' style='color:#f2f2fa ; font-size: 30px; margin-top:30%;'></i>
+                                    </label>
+
+                                </div>
+                                <div class="">@Html.ActionLink("اعدادات الوحدة السكنية", "EditUnit", "Maneger", new { id = item.UnitId })</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            }
+        </div>
+    </div>
+  
+</form>
+
+

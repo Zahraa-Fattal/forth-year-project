@@ -1,0 +1,84 @@
+﻿@model OurProject.Dto.UserDto.UserLogInDto
+@{
+    ViewData["Title"] = "SignInView";
+    Layout = "~/Views/Shared/SignIn/SignIn_Layout.cshtml";
+}
+
+
+<!--<body class="body_2" id="body_2">
+    <form asp-action="SignInView">
+        <div class="content5">
+            <div class="talk">
+                <h1>أهلا بك مجددا <span>Welcome back</span></h1>
+                <p> موقع أتمتة السكن الجامعي يهدف لتسهيل عملية تسجيلك كطالب والولوج للمعلومات التي تهم جميع المستخدمين من كادر ومسؤولين وطلبة ,ومن ثم الحرص على سير عملية التسجيل بطريقة منظمة وبما يوفر الوقت والجهد اللازمين </p>
+            </div>
+            <div class="login  text-right pl-2">
+                <div class="inputForm">
+                    <label asp-for="UserName" class="text-white">:أدخل اسم المستخدم</label>
+                    <input asp-for="UserName" class="text-right mb-0 mr-2" style="font-size:large" type="text" placeholder="أدخل اسمك:" dir="rtl">
+                    <span asp-validation-for="UserName" style="font-size:medium" class="text-danger mb-3"></span>
+                </div>
+                <div class="inputForm ">
+                    <label asp-for="Password" class=" text-white">:أدخل كلمة السر</label>
+                    <input asp-for="Password" class="text-right mb-0 mr-2  " style="font-size:large" type="password" placeholder="كلمة السر:" dir="rtl">
+                    <span asp-validation-for="Password" style="font-size:medium" class="text-danger mb-3 mt-2"></span>
+
+                </div>
+                <div class="form-group ">
+                    <button asp-controller="SignIn" asp-action="SignInBtn" type="submit" style="line-height: normal;" class=" inn  text-white mr-0 mt-3 ">تسجيل الدخول</button>
+                </div>
+                <div class="form-group ">
+                    <button type="submit" style="line-height: normal;" class=" inn1 text-white mr-0">تسجيل الدخول كطالب</button>
+                </div>
+                <div>
+                    <a href="#" class="text-white">هل نسيت كلمة المرور؟؟</a>
+                </div>
+            </div>
+        </div>
+    </form>-->
+<!--========== SCROLL REVEAL ==========-->
+<!--<script src="https://unpkg.com/scrollreveal"></script>-->
+<!--JS File-->
+<!--<script src="index.js"></script>
+</body>-->
+
+
+<div class="login-box cell">
+    <div class="login-key">
+        <img src="~/img/login2.png">
+    </div>
+    <div class=" login-title">
+        تسجيل الدخول
+    </div>
+
+
+ 
+    <div class=" login-form ">
+        <form asp-action="SignInView">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group text-right " dir="rtl">
+                        <label asp-for="@Model.UserName" class="form-control-label pl-2 justify-content-center ">اسم المستخدم</label>
+                        <input asp-for="@Model.UserName" type="text" class="form-control "style="font-size:large;" />
+                    </div>
+                    <div class="form-group text-right justify-content-center" dir="rtl">
+                        <label asp-for="@Model.Password" class="form-control-label pl-2">كلمة السر</label>
+                        <input asp-for="@Model.Password" type="password" class="form-control " style="font-size:large;" />
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="loginbttm" style="justify-content:center;">
+                @if (Program.IsDeleteBegin == false)
+                {
+                    <button type="submit" asp-controller="SignIn" asp-action="StudentSignInBtn" class="btn btn-outline-primary">الدخول كطالب </button>
+
+                }
+                <button asp-controller="SignIn" asp-action="SignInBtn" type="submit" class="btn btn-outline-primary ">تسجيل دخول</button>
+            </div>
+        </form>
+
+    </div>
+
+</div>

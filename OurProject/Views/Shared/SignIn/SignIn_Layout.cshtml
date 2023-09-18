@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="~/css/SignIn/SignIn.css" rel="stylesheet" />
+    <link href="~/Notification/toastr.css" rel="stylesheet" />
+    <title>login</title>
+</head>
+@{string noti = "  toastr.options.progressBar = true;" + "toastr.options.closeMethod = 'fadeOut';"
+                            + "toastr.options.closeEasing = 'swing';" + "toastr.options.positionClass = 'toast-bottom-right';"
+                                                + " toastr.options.closeButton = true; "; }
+<body onload="@noti+@Program.JavascriptToRun;" class="table">
+
+    @RenderBody()
+
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="~/Notification/toastr.js"></script>
+</body>
+</html>

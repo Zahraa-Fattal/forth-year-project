@@ -1,0 +1,245 @@
+﻿@model OurProject.Dto.UnitRoomDto.DisplayRoomDto
+@{
+    ViewData["Title"] = "RoomView";
+    Layout = "~/Views/Shared/SuperVisor/SuperVisor_Layout.cshtml";
+}
+@*Data Table Css*@
+<link href="~/css/StoreKeeper/DataTable/bootstrap.min.css" rel="stylesheet" />
+<link href="~/css/StoreKeeper/DataTable/dataTables.bootstrap5.min.css" rel="stylesheet" />
+
+<link href="~/css/SuperVisoir/rooms.css" rel="stylesheet" />
+<link href="~/LinkedCss/Maneger/MainManeger.bootstrap.min.css" rel="stylesheet" />
+
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link href="~/css/SuperVisoir/rooms.css" rel="stylesheet" />
+<body class="body8">
+    <form asp-action="RoomView">
+        <div class="container">
+            <h1 style="text-align:center; margin-bottom:20px">الطلاب الذين تم تسجيلهم</h1>
+            <div class="container mb-3">
+                <div class="d-grid gap-2 col-6 mx-auto" style="justify-content:center;display:flex">
+                    <button type="button" class=" button-2" data-toggle="modal" data-target="#exampleModalCenter">
+                        اختر تاريخ الفلترة
+                    </button>
+                    <input type="hidden" value="wael" asp-for="@Model.unitName" />
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+
+                        <div class="login-box">
+                            <h2 style="color:#fff">  الفترة المراد فلترتها</h2>
+
+                            <div class="user-box ">
+                                <div class="big">
+                                    <input min="2020-01-01" id="minDate" asp-for="@Model.minDate" type="date" style="font-size:20px" />
+                                    <label asp-for="@Model.minDate" style="font-size:20px">بداية الفترة</label>
+                                </div>
+                               
+                            </div>
+
+                            <div class="user-box">
+                                <div class="big">
+                                    <input min="2020-01-01" asp-for="@Model.maxDate" style=" font-size:20px; color: #fff; " type="date" id="maxDate" class=" col" dir="rtl">
+                                    <label asp-for="@Model.maxDate" style="font-size:20px">نهاية الفترة</label>
+                                    <small style="font-size: x-large; color: #970e00;">error</small>
+                                </div>
+                              
+                            </div>
+
+                            <button  onclick="return checkInputs();" class="a1"  asp-controller="SuperVisor" asp-action="StudentsFilter" style="display: flex; justify-content: center; color:#5a6f8a" type="submit">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                فلترة حسب التاريخ
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="dropdown">
+
+                <input id="SelectedStudentNumber" type="hidden" asp-for="@Model.SelectedStudentNumber" />
+            </div>
+            <div class="input-box" style=" width: 100%; ">
+                <div class="big" style="display:grid;float:right;">
+                    <label class="details" style="text-align: right; text-align: right; font-weight: 700; ">اختر عددالطلاب</label>
+
+
+
+                    <select asp-for="@Model.SelectedStudentNumber" class="form-select text-sm-right" id="dd1Counter" onchange="filterByStudentCount();" aria-label="Example select with button addon" style="width:fit-content">
+                        <option selected value="-1">لا يوجد</option>
+                        <option value="1">طالب</option>
+                        <option value="2">طالبان</option>
+                        <option value="3">ثلاث طلاب</option>
+                    </select>
+                    <button id="FilterByStudentCount" type="submit" style="display:none;" asp-controller="SuperVisor" asp-action="FilterByStudentCount"></button>
+
+                </div>
+
+
+                <div class="mb-0">
+
+                </div>
+
+
+            </div>
+
+
+
+            <div id="DivIdToPrint" class="printDiv">
+
+                <div id="header" class="header row" style="display:none;">
+                    <table class="table__1 caption-top col-sm-12 col-md-12 col-lg-12 pl-0" style="text-align: right; display:flex;justify-content:end;">
+                        <tbody>
+                            <tr>
+                                <th scope="row" style="padding-bottom: 1rem; font-size: xx-large; text-align: center; ">السكن الجامعي في حلب</th>
+                            </tr>
+
+                            <tr>
+                                <th scope="row" style="padding-bottom: 1rem; font-size: xx-large; text-align: center;">@Model.unitName</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="container  col-sm-12 col-md-12 col-lg-12 pl-0">
+                        <h1 style="text-align: center; color: #5a6f8a;">الطلاب الذين تم تسجيلهم  </h1>
+                    </div>
+
+                </div>
+
+
+
+                <div class="table-responsive">
+                    <table  id="example" class="table table-striped" style="width:100%;text-align:center;">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center;">تاريخ</th>
+                                <th style="text-align:center;">طالب4</th>
+                                <th style="text-align:center;">تاريخ</th>
+                                <th style="text-align:center;">3طالب</th>
+                                <th style="text-align:center;">تاريخ</th>
+                                <th style="text-align:center;">طالب2</th>
+                                <th style="text-align:center;">تاريخ</th>
+                                <th style="text-align:center;">طالب1</th>
+                                <th style="text-align:center;">العدد الكلي</th>
+                                <th style="text-align:center;">الغرفة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ bool ispass = false; }
+                            @for (int i = 0; i < Model.getRoomsInUnitDtos.Count; i++)
+                            {
+                                <tr>
+
+                                    @for (int j = 0; j < Model.getStudentInRoomDtos[i].Count; j++)
+                                    {
+                                        if (Model.getStudentInRoomDtos[i].Count == 4)
+                                        {
+                                            <td>@Model.getStudentInRoomDtos[i][j].RecordedDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@Model.getStudentInRoomDtos[i][j].studentName</td>
+                                        }
+                                        else if (Model.getStudentInRoomDtos[i].Count == 3)
+                                        {
+                                            if (!ispass)
+                                            {
+                                                <td></td>
+                                                <td></td>
+                                                ispass = true;
+                                            }
+                                            <td>@Model.getStudentInRoomDtos[i][j].RecordedDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@Model.getStudentInRoomDtos[i][j].studentName</td>
+                                        }
+                                        else if (Model.getStudentInRoomDtos[i].Count == 2)
+                                        {
+                                            if (!ispass)
+                                            {
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                ispass = true;
+                                            }
+                                            <td>@Model.getStudentInRoomDtos[i][j].RecordedDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@Model.getStudentInRoomDtos[i][j].studentName</td>
+                                        }
+                                        else
+                                        {
+                                            if (!ispass)
+                                            {
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                ispass = true;
+                                            }
+                                            <td>@Model.getStudentInRoomDtos[i][j].RecordedDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@Model.getStudentInRoomDtos[i][j].studentName</td>
+                                        }
+
+                                    }
+                                    @{ispass = false;
+                                    }
+
+
+                                    <td>@Model.getRoomsInUnitDtos[i].StudentCount</td>
+                                    <td>@Model.getRoomsInUnitDtos[i].roomName</td>
+                                </tr>
+                            }
+                    </table>
+                </div>
+
+                <div id="footer" class=" row" style="width: 100%; display:none;">
+
+                    <table class="table__1 caption-top col-sm-12 col-md-12 col-lg-12 pl-0" style="text-align: right;">
+                        <tbody>
+                            <tr>
+
+                                <th scope="row" style="padding-bottom: 1rem; font-size: x-large; width: 25rem;">:مسؤول السكن و توقيعه</th>
+
+
+                                <td style="padding-bottom: 1rem; font-size: x-large; width: 17rem; ">@Program.CurrentUser.Name</td>
+                                <th scope="row" style="padding-bottom: 1rem; padding-right:1rem; font-size:x-large; width: 17rem;">:المشرف و توقيعه</th>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="container mb-3">
+                <div class="d-grid gap-2 col-6 mx-auto"style="justify-content:center;display:flex">
+                    <button id="btn" class="btn btn-add button-2 btn-outline-primary mt-5 p-2" onclick="return PrintElem();" type="button">طباعة</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+    <script src="~/js/SuperVisoir/PrintRoom.js"></script>
+    <script src="~/js/SuperVisoir/RoomFilter.js"></script>
+    <script src="~/js/jquery-3.2.1.min.js"></script>
+    <script src="~/js/StoreKeeper/FilterByDateValidation.js"></script>
+
+    @*Data Table js*@
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+</body>
+

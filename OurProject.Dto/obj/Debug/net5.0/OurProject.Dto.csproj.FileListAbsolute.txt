@@ -1,0 +1,12 @@
+C:\Users\Wael\Desktop\OurProject\OurProject.Dto\bin\Debug\net5.0\OurProject.Dto.deps.json
+C:\Users\Wael\Desktop\OurProject\OurProject.Dto\bin\Debug\net5.0\OurProject.Dto.dll
+C:\Users\Wael\Desktop\OurProject\OurProject.Dto\bin\Debug\net5.0\ref\OurProject.Dto.dll
+C:\Users\Wael\Desktop\OurProject\OurProject.Dto\bin\Debug\net5.0\OurProject.Dto.pdb
+C:\Users\Wael\Desktop\OurProject\OurProject.Dto\obj\Debug\net5.0\OurProject.Dto.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Wael\Desktop\OurProject\OurProject.Dto\obj\Debug\net5.0\OurProject.Dto.AssemblyInfoInputs.cache
+C:\Users\Wael\Desktop\OurProject\OurProject.Dto\obj\Debug\net5.0\OurProject.Dto.AssemblyInfo.cs
+C:\Users\Wael\Desktop\OurProject\OurProject.Dto\obj\Debug\net5.0\OurProject.Dto.csproj.CoreCompileInputs.cache
+C:\Users\Wael\Desktop\OurProject\OurProject.Dto\obj\Debug\net5.0\OurProject.Dto.dll
+C:\Users\Wael\Desktop\OurProject\OurProject.Dto\obj\Debug\net5.0\ref\OurProject.Dto.dll
+C:\Users\Wael\Desktop\OurProject\OurProject.Dto\obj\Debug\net5.0\OurProject.Dto.pdb
+C:\Users\Wael\Desktop\OurProject\OurProject.Dto\obj\Debug\net5.0\OurProject.Dto.csproj.AssemblyReference.cache

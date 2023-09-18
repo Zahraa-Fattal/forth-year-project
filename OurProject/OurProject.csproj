@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OurProject.Repo\OurProject.Repo.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\css\StoreKeeper\DataTable\" />
+    <Folder Include="wwwroot\LinkedCss\Maneger\" />
+    <Folder Include="wwwroot\Linkedjs\" />
+  </ItemGroup>
+
+</Project>

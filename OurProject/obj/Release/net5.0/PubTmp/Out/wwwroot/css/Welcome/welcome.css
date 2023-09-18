@@ -1,0 +1,135 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Jost', sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  /*display: flex;*/
+  /* flex-direction: column;*/
+  align-items: center;
+  /*justify-content: center;*/
+  height: 100vh;
+  font-family: "Montserrat", sans-serif;
+  padding: 3%
+}
+
+:root {
+  --main-color: #90AAB9;
+  --dark-main-color: #1a5086;
+
+  --brown-color: #4D4644;
+  --text-color: #d7dddd;
+}
+
+/*welcom*/
+
+.body_1 {
+
+
+  background-size: cover;
+
+  background-image: linear-gradient(rgba(90, 118, 138, 0.8), rgba(90, 118, 138, 0.8)), url(../../img/9.jpg);
+}
+
+.container_11 h3 {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: rgb(232, 231, 240) !important;
+  position: relative;
+
+}
+
+
+.table {
+  display: table;
+}
+
+.table-cell {
+  display: table-cell;
+}
+
+.container_22 {
+
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: rgb(228, 228, 240) !important;
+  position: relative;
+
+
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 2%;
+  padding: .7rem 2.5rem;
+  font-size: 1.5rem;
+  border-radius: .5rem;
+  color: rgb(228, 228, 240) !important;
+
+  position: relative;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+  overflow: hidden;
+  z-index: 0;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  clip-path: polygon(0 0, 100% 0, 10% 25%, 0 100%);
+  z-index: -1;
+  background: rgb(228, 228, 240);
+  transition: .3s cubic-bezier(.38, 1.15, .7, 1.12);
+}
+
+.btn:hover:before {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.btn:hover {
+  color: #74b1ee !important;
+}
+
+
+/*end welcom*/
+
+/* welcome */
+@media (max-width:1115px) {
+  .container_11 h3 {
+    position: unset;
+
+
+
+  }
+
+}
+
+
+/*@media (max-width:986px) {
+  .body_1 {
+
+
+    background-image: url(img/photo_2022-04-18_13-18-23.jpg);
+
+    background-size: cover;
+
+  }
+}*/
+
+
+
+
+@media (max-width:340px) {
+  .container_11 h3 {
+    font-size: 23px;
+
+
+  }
+
+}
+
+/* welcome */

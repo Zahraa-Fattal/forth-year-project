@@ -1,0 +1,234 @@
+﻿@model OurProject.Dto.StudentDto.GetFullInformationAboutStudentsDto
+@{
+    ViewData["Title"] = "FullInformationView";
+    Layout = "~/Views/Shared/Maneger/ShowFullInformation_Layout.cshtml";
+}
+@*Data Table Css*@
+<link href="~/css/StoreKeeper/DataTable/bootstrap.min.css" rel="stylesheet" />
+<link href="~/css/StoreKeeper/DataTable/dataTables.bootstrap5.min.css" rel="stylesheet" />
+
+<link href="~/css/design.css" rel="stylesheet" />
+<body>
+    <form>
+        <div class="container">
+            <h1>سجل السكن الجامعي</h1>
+            <div class="row">
+
+                <div class="col-sm-12 col-md-12 col-lg-4" style="display: grid;">
+
+                    <p>: اختر الفترة المرادة</p>
+                    <div class="big" style="display: grid;">
+                        <label asp-for="@Model.minDate" style="text-align: right; font-size: 15px; color:#607281;">:تاريخ البداية</label>
+                        <input id="minDate" asp-for="@Model.minDate" type="date" min="2020-01-01" class="m" style=" color:#fff">
+                    </div>
+
+                    <div class="big" style="display: grid;">
+                        <label asp-for="@Model.maxDate" style="text-align: right; font-size: 15px; color:#607281;">:تاريخ النهاية</label>
+                        <input id="maxDate" asp-for="@Model.maxDate" type="date" min="2020-01-01" style=" color:#fff" class="m">
+                        <small>error</small>
+                    </div>
+
+
+                    @if (Model.GetFullInformation.Count == 0)
+                    {
+                        <div style="display:flex;justify-content:center;padding-top:2rem">
+                            <button disabled onclick="return checkInputs();" type="submit" asp-controller="Maneger" asp-action="FilterByDate" class="s1"> فلترة</button>
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="display:flex;justify-content:center;padding-top:2rem">
+                            <button onclick="return checkInputs();" type="submit" asp-controller="Maneger" asp-action="FilterByDate" class="s1"> فلترة</button>
+                        </div>
+                    }
+
+
+
+
+                </div>
+
+                <div class="col-sm-12 col-md-12 col-lg-4">
+                    <div class="box" style="margin-top: 20px;">
+                        @if (Model.GetFullInformation.Count != 0)
+                        {
+                            <div style="display:flex;justify-content:end">
+                                <p style="padding-right:10px">@Model.GetFullInformation[0].SuperVisorName </p>
+                                <p>:المشرف </p>
+                            </div>
+
+                            <div style="display:flex;justify-content:end">
+                                <p style="padding-right:10px">@Model.GetFullInformation[0].StoreKeeperName </p>
+                                <p>: أمين المستودع </p>
+                            </div>
+
+                            <div style="display:flex;justify-content:end">
+                                <p style="padding-right:10px">@Model.GetFullInformation[0].studyBranchesName </p>
+                                <p>: الفرع الدراسي </p>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-4" style="display: flex; justify-content: right;">
+
+
+                    <select asp-for="@Model.SelectedUnitId" onchange="filter();" class="m" style="overflow-y: scroll; height: 30px !important;margin-top: 20px; font-weight: bold !important;color:#fff; font-size: 16px;">
+                        <option style="color: #000000; text-align: right"  value="-1" >اختر الوحدة المراد عرض بياناتها</option>
+                        @foreach (var item in Model.getAllUnitDtos)
+                        {
+                            <option style="color:#000000; text-align:right" value="@item.id">@item.Name</option>
+                        }
+                    </select>
+                    <button id="FilterByUnit" type="submit" style="display:none" asp-controller="Maneger" asp-action="FilterBySelectedUnit">wwwww</button>
+
+                </div>
+
+            </div>
+
+            <div id="DivIdToPrint" class="printDiv">
+                <div id="header" class="header row" style="display:none;">
+                    <table class="table__1 caption-top col-sm-12 col-md-12 col-lg-12 pl-0" style="text-align: right; display:flex;justify-content:end;">
+                        <tbody>
+                            <tr>
+                                <th scope="row" style="padding-bottom: 1rem; font-size: xx-large; text-align: center; ">السكن الجامعي في حلب</th>
+                            </tr>
+
+                            <tr>
+                                <th scope="row" style="padding-bottom: 1rem; font-size: xx-large; text-align: center;">@Model.unitName</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="container  col-sm-12 col-md-12 col-lg-12 pl-0">
+                        <h1 style="text-align: center; color: #5a6f8a;">سجل السكن الجامعي</h1>
+                    </div>
+
+                </div>
+
+                <div class="includer ">
+                    <div class="table-responsive">
+                        <table id="example" class="table table-striped" style="width:100%">
+
+                            <thead>
+                                <tr>
+                                    <th class="th-sm" style="text-align: right;">
+                                        مقيم\مغادر
+                                    </th>
+                                    <th class="th-sm" style="text-align: right;">
+                                        تاريخ تسجيله
+                                    </th>
+                                    <th class="th-sm" style="text-align: right;">
+                                        الغرفة
+                                    </th>
+                                    <th class="th-sm" style="text-align: right;">
+                                        الريف
+                                    </th>
+                                    <th class="th-sm" style="text-align: right;">
+                                        مدينته
+                                    </th>
+                                    <th class="th-sm" style="text-align: right;">
+                                        رقم هاتفه
+                                    </th>
+                                    <th class="th-sm" style="text-align: right;">
+                                        رقمه الوطني
+                                    </th>
+                                    <th class="th-sm" style="text-align: right;">
+                                        رقمه الجامعي
+                                    </th>
+                                    <th class="th-sm" style="text-align: right;">
+                                        اسم الطالب
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.GetFullInformation)
+                                {
+                                    <tr style="text-align: right;">
+                                        @if (item.IsDeleted)
+                                        {
+                                            <td style="text-align:center">مغادر</td>
+                                        }
+                                        else
+                                        {
+                                            <td style="text-align:center">مقيم</td>
+                                        }
+                                        <td>@item.RecordedDate.ToString("dd/MM/yyyy hh:mm tt")</td>
+                                        <td>@item.roomName</td>
+                                        @if (!string.IsNullOrEmpty(item.mainCityName))
+                                        {
+                                            <td>@item.mainOrCountryName</td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+                                        @if (!string.IsNullOrEmpty(item.mainCityName))
+                                        {
+                                            <td style="text-align:center">@item.mainCityName</td>
+                                        }
+                                        else
+                                        {
+                                            <td style="text-align:center">@item.mainOrCountryName</td>
+                                        }
+
+                                        <td>@item.PhoneNumber</td>
+                                        <td>@item.NationalId</td>
+                                        <td>@item.UniversityId</td>
+                                        <td>@item.studentName</td>
+                                    </tr>
+                                }
+
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </div>
+
+
+                <div id="footer" class=" row" style="width: 100%; display:none;">
+
+                    <table class="table__1 caption-top col-sm-12 col-md-12 col-lg-12 pl-0" style="text-align: right;">
+                        <tbody>
+                            <tr style="display:flex;justify-content:end">
+                                <td style="padding-bottom: 1rem; font-size: x-large; padding-right:2rem  ">@Program.CurrentUser.Name</td>
+
+                                <th scope="row" style="padding-bottom: 1rem; font-size: x-large; ">:مسؤول السكن و توقيعه</th>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <div style="display:flex;justify-content:center">
+                <button onclick="return PrintElem();" class="s1"> طباعة</button>
+            </div>
+        </div>
+    </form>
+
+
+    <script src="~/Linkedjs/jquery-3.3.1.slim.min.js"></script>
+    <script src="~/Linkedjs/bootstrap.min.js"></script>
+    <script src="~/js/StoreKeeper/FilterByDateValidation.js"></script>
+    <script src="~/js/jquery-3.2.1.min.js"></script>
+    @*Data Table js*@
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+
+            });
+        });
+
+        function filter() {
+
+            document.getElementById('FilterByUnit').click();
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="~/js/PrintFullInformation.js"></script>
+</body>
+

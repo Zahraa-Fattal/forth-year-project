@@ -1,0 +1,21 @@
+﻿<h1 style="text-align:right;">مرحبا name</h1>
+<h3 style="text-align:right;">اهلا بك في السكن الجامعي</h3>
+<div class="row" style="float:right;">
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    username
+                </td>
+                <th>:حسابك هو</th>
+            </tr>
+                <tr>
+                <td>
+                    password
+                </td>
+                <th>:كلمة مرورك هي</th>
+            </tr>
+        </tbody>
+    </table>
+    <h5 style="text-align:right;"> يمكنك البدء ب العمل معنا ك role</h5>
+</div>

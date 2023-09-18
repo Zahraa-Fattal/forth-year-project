@@ -1,0 +1,116 @@
+﻿@model OurProject.Dto.StudentAccessoriesDto.AddItemsToStudentDto
+@{
+    ViewData["Title"] = "AddItemsToStudentView";
+    Layout = "~/Views/Shared/StoreKeeper/StoreKeepr_Layout.cshtml";
+}
+<link href="~/css/StoreKeeper/warehouseAdd.css" rel="stylesheet" />
+<body class="body1">
+    <div class="wrapper">
+        <div class="main">
+            <h1>اختر مستلزماتك</h1>
+            <form id="form" action="" method="post">
+
+                <label for="subject" class="intpt" dir="rtl" style="height:3rem;">
+                    <label style="float:right;">@Model.StudentName</label>
+                </label>
+                @for (int i = 0; i < Model.getItemsInStoreUnitDtos.Count; i++)
+                {
+                    string StudentAmontChosen = "StudentAmontChosen" + i;
+                    string StudentTaken = "StudentTaken" + i;
+                    string StoreDetailsAmount = "StoreDetailsAmount" + i;
+                    <input type="hidden" asp-for="@Model.addStudentAccessoriesDtos[i].StudentId" value="@Model.StudentId" />
+
+                    <input type="hidden" asp-for="@Model.addStudentAccessoriesDtos[i].StoreDetailId" value="@Model.getItemsInStoreUnitDtos[i].StoreDetailsId" />
+                    <input type="hidden" id="@StudentTaken" value="@Model.getItemsInStoreUnitDtos[i].studentAmount" />
+                    <input type="hidden" id="@StoreDetailsAmount" value="@Model.getItemsInStoreUnitDtos[i].StoreDetailsAmount" />
+                    <label for="subject" class="intpt" dir="rtl">
+                        <div class="big">
+                            <select asp-for="@Model.addStudentAccessoriesDtos[i].Amount" id="@StudentAmontChosen" onchange="inputPercent('@StudentAmontChosen', '@StudentTaken','@StoreDetailsAmount');" tabindex="4">
+                                <option value="-1">@Model.getItemsInStoreUnitDtos[i].AccessoriesName</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2 </option>
+                            </select>
+                            <small>error</small>
+                        </div>
+                        @if (Model.getItemsInStoreUnitDtos[i].StoreDetailsAmount < 10)
+                        {
+                            <small style="color:red;">المتبقي @Model.getItemsInStoreUnitDtos[i].StoreDetailsAmount</small>
+                           <html>|</html>
+                            <small>تم أخذه @Model.getItemsInStoreUnitDtos[i].studentAmount</small>
+
+                        }
+                        else
+                        {
+                            <small >المتبقي @Model.getItemsInStoreUnitDtos[i].StoreDetailsAmount</small>
+                            <html>
+                            |
+                            </html>
+                            <small>تم أخذه @Model.getItemsInStoreUnitDtos[i].studentAmount</small>
+
+                        }
+
+
+
+                    </label>
+                }
+                @{int u = 100; }
+                @for (int i = 0; i < Model.getExtraItemsInStoreUnitDtos.Count; i++)
+                {
+
+                    string StudentAmontChosen = "StudentAmontChosen" + u;
+                    string StudentTaken = "StudentTaken" + u;
+                    string StoreDetailsAmount = "StoreDetailsAmount" + u;
+                    u++;
+                    <input type="hidden" asp-for="@Model.addExtraStudentAccessoriesDtos[i].StudentId" value="@Model.StudentId" />
+
+                    <input type="hidden" asp-for="@Model.addExtraStudentAccessoriesDtos[i].StoreDetailId" value="@Model.getExtraItemsInStoreUnitDtos[i].StoreDetailsId" />
+                    <input type="hidden" id="@StudentTaken" value="@Model.getExtraItemsInStoreUnitDtos[i].studentAmount" />
+                    <input type="hidden" id="@StoreDetailsAmount" value="@Model.getExtraItemsInStoreUnitDtos[i].StoreDetailsAmount" />
+                    <label for="subject" class="intpt" dir="rtl">
+                        <div class="big">
+                            <select asp-for="@Model.addExtraStudentAccessoriesDtos[i].Amount" id="@StudentAmontChosen" onchange="inputPercent('@StudentAmontChosen', '@StudentTaken','@StoreDetailsAmount');" tabindex="4">
+                                <option value="-1">@Model.getExtraItemsInStoreUnitDtos[i].AccessoriesName</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2 </option>
+                            </select>
+                            <small>error</small>
+                        </div>
+
+                        @if (Model.getExtraItemsInStoreUnitDtos[i].StoreDetailsAmount < 10)
+                        {
+                            <small style="color:red;">المتبقي @Model.getExtraItemsInStoreUnitDtos[i].StoreDetailsAmount</small>
+                            <html>
+                            |
+                            </html>
+                        <small>تم أخذه @Model.getExtraItemsInStoreUnitDtos[i].studentAmount</small>
+
+                         }
+                    else
+                    {
+                        <small >المتبقي @Model.getExtraItemsInStoreUnitDtos[i].StoreDetailsAmount</small>
+                        <html>
+                        |
+                       </html>
+                       <small>تم أخذه @Model.getExtraItemsInStoreUnitDtos[i].studentAmount</small>
+                    }
+
+                    </label>
+                }
+                <div class="big" style="display:flex; justify-content:center; margin-top:2rem;">
+                    <small id="ChooseOne">error</small>
+                </div>
+
+
+                <div class="bott">
+                    <p style="display:flex;justify-content:center;"><input style="margin-bottom:2rem;" asp-controller="StoreKeeper" asp-action="AddItemToStudentBtn" onclick="return checkValidation();" type="submit" value="تسجيل" class="btn fl"></p>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="~/js/StoreKeeper/AddItemsValidation.js"></script>
+    <script src="~/js/jquery-3.2.1.min.js"></script>
+</body>
+

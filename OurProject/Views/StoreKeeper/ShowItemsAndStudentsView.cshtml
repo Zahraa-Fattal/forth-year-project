@@ -1,0 +1,177 @@
+﻿@model OurProject.Dto.StudentAccessoriesDto.ShowStudentThatHasItems
+@{
+    ViewData["Title"] = "ShowItemsAndStudentsView";
+    Layout = "~/Views/Shared/StoreKeeper/StoreKeepr_Layout.cshtml";
+}
+@*Data Table Css*@
+<link href="~/css/StoreKeeper/DataTable/bootstrap.min.css" rel="stylesheet" />
+<link href="~/css/StoreKeeper/DataTable/dataTables.bootstrap5.min.css" rel="stylesheet" />
+
+<link href="~/css/StoreKeeper/student'sStuff.css" rel="stylesheet" />
+<body class="body8">
+    <div class="container">
+        <h1 style="text-align: center; color: #5a6f8a;">الطلاب الذين تم تسليمهم المستلزمات  </h1>
+        <div class="row" style="justify-content:end;">
+
+
+            <div class="col-sm-12 col-md-12 col-lg-12 pl-0" style="display: flex; justify-content: center; margin-top: 3%;">
+                <button type="button" class=" button-2" data-toggle="modal" data-target="#exampleModalCenter">
+                    اختر تاريخ الفلترة
+                </button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+
+                        <div class="login-box">
+                            <h2>  الفترة المراد فلترتها</h2>
+                            <form id="form">
+                                <div class="user-box ">
+                                    <div class="big">
+                                        <input min="2020-01-01"  id="minDate" asp-for="@Model.minDate" style="font-size: large;" type="date" />
+                                        <label asp-for="@Model.minDate">بداية الفترة</label>
+                                    </div>
+                                  
+                                </div>
+                                <div class="user-box">
+                                    <div class="big">
+                                        <input  min="2020-01-01"  asp-for="@Model.maxDate" style="font-size: large; background-color: rgb(144 170 185); color: #fff; " type="date" id="maxDate" class=" col" dir="rtl">
+                                        <label asp-for="@Model.maxDate">نهاية الفترة</label>
+                                        <small>error</small>
+                                    </div>
+                                
+                                </div>
+                                <button onclick="return checkInputs();" asp-controller="StoreKeeper" asp-action="ShowItemsAndStudentByDate" style="display: flex; justify-content: center;" type="submit">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    فلترة حسب التاريخ
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div id="DivIdToPrint" class="printDiv" style="display:contents;">
+                <div id="header" class="header row" style="display:none;">
+                    <table class="table__1 caption-top col-sm-12 col-md-12 col-lg-12 pl-0" style="text-align: right; display:flex;justify-content:end;">
+                        <tbody>
+                            <tr>
+                                <th scope="row" style="padding-bottom: 1rem; font-size: xx-large; text-align: center; ">السكن الجامعي في حلب</th>
+                            </tr>
+
+                            <tr>
+                                <th scope="row" style="padding-bottom: 1rem; font-size: xx-large; text-align: center;">@Model.UnitName</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="container  col-sm-12 col-md-12 col-lg-12 pl-0">
+                        <h1 style="text-align: center; color: #5a6f8a;">الطلاب الذين تم تسليمهم المستلزمات  </h1>
+                    </div>
+
+                </div>
+
+                <div class="table-responsive">
+                    @{bool printed = false; }
+                    <table id="example" class="table table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center">تاريخ الاستلام</th>
+                                @for (int i = 0; i < Model.getAccessoriesDetailsDtos.Count; i++)
+                                {
+                                    <th>@Model.getAccessoriesDetailsDtos[i].ItemName</th>
+                                }
+                                <th style="text-align:right">اسم الطالب</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.getStudentThatHasItemsDtos.Count; i++)
+                            {
+                                <tr class="table-row">
+                                    <td style="text-align:center" class="col col-2">@Model.getStudentThatHasItemsDtos[i].AccessoriesDate.ToString("dd/MM/yyyy")</td>
+                                    @for (int k = 0; k < Model.getAccessoriesDetailsDtos.Count; k++)
+                                    {
+                                        printed = false;
+
+                                        @for (int j = 0; j < Model.getItemsByStudentIdDtos[i].Count; j++)
+                                        {
+                                            if (Model.getItemsByStudentIdDtos[i][j].AccessoriesId == Model.getAccessoriesDetailsDtos[k].AccessoriesId)
+                                            {
+                                                <td class="col col-1" data-label="@Model.getItemsByStudentIdDtos[i][j].AccessoriesName">@Model.getItemsByStudentIdDtos[i][j].StudentAccessoriesAmount</td>
+                                                printed = true;
+                                            }
+
+                                        }
+                                        if (!printed)
+                                        {
+                                            <td class="col col-1" data-label="@Model.getAccessoriesDetailsDtos[k].ItemName">0</td>
+                                            printed = false;
+                                        }
+
+
+                                    }
+
+                                    <td style="text-align:right" class="col col-2" data-label=": اسم الطالب">@Model.getStudentThatHasItemsDtos[i].StudentName</td>
+                                </tr>
+                            }
+                    </table>
+                </div>
+                <div id="footer" class=" row" style="width: 100%; display:none;">
+
+                    <table class="table__1 caption-top col-sm-12 col-md-12 col-lg-12 pl-0" style="text-align: right;">
+                        <tbody>
+                            <tr>
+
+                                <th scope="row" style="padding-bottom: 1rem; font-size: x-large; width: 25rem;">:مسؤول السكن و توقيعه</th>
+
+
+                                <td style="padding-bottom: 1rem; font-size: x-large; width: 17rem; ">@Program.CurrentUser.Name</td>
+                                <th scope="row" style="padding-bottom: 1rem; padding-right:1rem; font-size:x-large; width: 17rem;">:امين المستودع و توقيعه</th>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="container mb-3">
+                <div class="col-sm-12 col-md-12 col-lg-12 pl-0" style="display: flex; justify-content: center; ">
+
+                    <button id="btn" style="margin-bottom:6px;" class="btn btn-add button-2 btn-outline-primary mt-5 " onclick="return PrintElem();" type="button">طباعة</button>
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+    </div>
+    <script src="~/js/StoreKeeper/PrintItems.js"></script>
+    <script src="~/js/jquery-3.2.1.min.js"></script>
+    <script src="~/js/StoreKeeper/FilterByDateValidation.js"></script>
+    @*Data Table js*@
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+          
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    
+    
+    
+
+    
+
+</body>
+

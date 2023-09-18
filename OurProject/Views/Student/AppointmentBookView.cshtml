@@ -1,0 +1,244 @@
+﻿@model OurProject.Dto.StudentDto.AddAppointmentDto
+
+
+@{
+    ViewData["Title"] = "AppointmentBookView";
+    Layout = "~/Views/Shared/Student/Student_Layout.cshtml";
+}
+<link href="~/css/Student/date1.css" rel="stylesheet" />
+
+<div class="container xx mt-5">
+    <h1 class="title text-right" style="color: #1a5086; font-size: 35PX;">احجز موعدك</h1>
+
+
+    <!-- Form -->
+    <form asp-action="AppointmentBookView" id="form">
+        <div class=" form-row" style="justify-content:center;">
+            <div class=" col-sm-12 col-md-12 col-lg-5 pl-0 text-right">
+                @*Email*@
+                <div class="big">
+                    <label style="font-size: 20PX; font-weight: 700; color: #1a5086;">:البريد الالكتروني</label>
+                    <input style="font-size:x-large;padding-right:10px;" id="Email" dir="rtl" type="text" class="input" placeholder="" required>
+                    <small style="font-size:x-large;">error</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class=" col-sm-12 col-md-12 col-lg-5 pl-0 text-right">
+                @*Study Branch*@
+                <div class="pb-2">
+                    <div class="dropdown">
+                        <div class="big">
+                            <label class="control-label text-right " style="color: #1a5086; font-size: 20PX; display: grid; font-weight: 700">الفرع الدراسي</label>
+                            <select style="font-size: x-large; color: #1a5086;" id="studyBranch" class="form-select btt  text-right "  aria-labelledby="dropdownMenuLink" required>
+                                <option selected value="-1">لايوجد</option>
+                                @foreach (var item in Model.studyBranchs)
+                                {
+                                    <option value="@item.id">@item.Name</option>
+                                }
+                            </select>
+                            <small style="font-size:x-large;">error</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class=" col-sm-12 col-md-12 col-lg-5 pl-0 text-right">
+                @*Name*@
+                <div class="big">
+                    <label style="font-size: 20PX; font-weight: 700; color: #1a5086;">:الاسم الكامل</label>
+                    <input style="font-size:x-large;padding-right:10px;" id="fullname" dir="rtl" type="text" class="input" placeholder="" required>
+                    <small style="font-size:x-large;">error</small>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="form-row">
+            <div class=" col-sm-12 col-md-12 col-lg-5 pl-0 text-right">
+                @*Main City*@
+                <div class="pb-2">
+                    <div class="dropdown">
+                        <div class="big">
+                            <label class="control-label text-right " style="color: #1a5086; font-weight: 700; font-size:20px; display: grid;">المحافظة</label>
+                            <select style="font-size: x-large; color: #1a5086;" id="mainCity" onchange="getCountry();" class="form-select btt  text-right "  aria-labelledby="dropdownMenuLink" required>
+                                <option selected value="-1">لايوجد</option>
+                                @foreach (var item in Model.GetMainCities)
+                                {
+                                    <option value="@item.Id">@item.mainCityName</option>
+                                }
+                            </select>
+                            <small style="font-size:x-large;">error</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class=" col-sm-12 col-md-12 col-lg-5 pl-0 text-right">
+                @*Univercity Number*@
+                <div class="big">
+                    <label for="" style=" font-weight: 700; font-size: 20px; color: #1a5086;">: الرقم الجامعي</label>
+                    <input style="font-size:x-large;padding-right:10px;" id="UnivercityNumber" dir="rtl" type="number" class="input" placeholder="" maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                    <small style="font-size:x-large;">error</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+
+            <div class="col-sm-12 col-md-12 col-lg-5 pl-0 text-right">
+                @*Country*@
+                <div class="pb-2">
+                    <div class="dropdown">
+                        <div class="big">
+                            <label class="control-label text-right " style="color: #1a5086; font-weight: 700; font-size: 20px; display: grid;">:الريف</label>
+                            <select style="font-size: x-large; color: #1a5086;" id="country" class="form-select btt  text-right "  aria-labelledby="dropdownMenuLink" required>
+                                <option selected value="-1">لايوجد</option>
+
+                            </select>
+                            <small style="font-size:x-large;">error</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class=" col-sm-12 col-md-12 col-lg-5 pl-0 text-right">
+                @*National Id*@
+                <div class="big">
+                    <label style="font-weight: 700; font-size: 20px; color: #1a5086;">:الرقم الوطني</label>
+                    <input style="font-size:x-large;" id="NationalNumber" dir="rtl" type="number" class="input" placeholder="" maxlength="11" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                    <small style="font-size:x-large;">error</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            @*Image*@
+            <div class=" col-sm-12 col-md-12 col-lg-5 pl-0 text-right">
+                <label for="" style=" font-weight: 700; font-size:20px; color: #1a5086;">:الصورة الشخصية</label>
+                <input style="font-size: x-large; background-color: white;" id="inputFile" onchange="fileSelectedChanged(this,'submitbtn','userImage','Users\\','save-image')" type="file" accept=".jpg,.png,.jpeg,.bmp,.gif" class="input" >
+                <input id="save-image" type="hidden" />
+            </div>
+
+            <div class=" col-sm-12 col-md-12 col-lg-5 pl-0 text-right">
+                @*Phone Number*@
+                <div class="big">
+                    <label for="fullname " style="font-weight: 700; font-size: 20px; color: #1a5086; ">:رقم الهاتف</label>
+                    <input style="font-size:x-large;padding-right:10px;" id="phoneNumber" dir="rtl" type="text" placeholder="" class="input" required>
+                    <small style="font-size:x-large;">error</small>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class=" col-sm-12 col-md-12 col-lg-5 pl-0 text-right" style=" margin-top: 1%;font-size: 30px; color: #1a5086;">
+            <div class="inputBox in8">
+                <div class="big">
+                    <span>ذكر</span>
+                    <input onchange="setMale();"  type="checkbox" id="Malecheck" />
+                </div>
+
+            </div>
+            <div class="inputBox in9">
+                <div class="big">
+                    <span>أنثى</span>
+                    <input onchange="setFemale();"  type="checkbox" id="Femalecheck" />
+                    <small style="display:block; font-size:x-large;">error</small>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <button  id="book" onclick="return checkInputs();" class="button_11" type="button" style="margin-top: 5%; font-size: 20PX;">حجز الموعد</button>
+
+
+    </form>
+
+
+
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" id="modaltrigger" style="display:none;" class="btn xx btn-primary" data-toggle="modal" data-target="#exampleModal">
+    حجز الموعد
+</button>
+
+<!-- Modal -->
+<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content model1">
+            <div class="modal-header" style="justify-content:end;">
+
+            
+                <h3 class="modal-title " id="exampleModalLabel">الموعد</h3>
+            </div>
+            <div class="modal-body text-right"style="font-size:20px">
+                مرحبا <p id="displayname"></p> شكرا لاستخدامك تطبيقنا<br />
+                يرجى مراجعة <p id="unitname"></p><br />
+                موعدك هو <p id="finalDate" style="color: #007bff;"></p>
+            </div>
+            <div class="modal-footer justify-content-center">
+
+                <button  type="button" class="btn btn-outline-primary" data-dismiss="modal" style="font-size:20px">حسنا</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Button trigger modal -->
+<button type="button" id="erorremodaltrigger" style="display:none;" class="btn xx btn-primary" data-toggle="modal" data-target="#exampleModal1">
+    حجز الموعد
+</button>
+
+<!-- Modal -->
+<div class="modal fade " id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content model1">
+            <div class="modal-header">
+
+                <button type="button" class="close text-right" data-dismiss="modal" aria-label="Close">
+                </button>
+                <h3 class="modal-title " id="exampleModalLabel">الموعد</h3>
+            </div>
+            <div class="modal-body text-right" style="font-size:20px">
+                !!! عذرا لا يوجد وحدات سكنية شاغرة
+            </div>
+            <div class="modal-footer justify-content-center">
+
+                <button type="button" class="btn btn-outline-primary" data-dismiss="modal"style="font-size:20px" >حسنا</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="~/js/jquery-3.2.1.min.js"></script>
+<script src="~/js/Upload.js"></script>
+<script src="~/js/Student/AppointmentCountrySelect.js"></script>
+<script>
+    function setMale() {
+        var Female = document.getElementById("Femalecheck");
+        if (Female.checked) {
+            Female.checked = false;
+        } 
+    }
+
+    function setFemale() {
+        var Male = document.getElementById("Malecheck");
+        if (Male.checked) {
+            Male.checked = false;
+        }
+    }
+</script>
+

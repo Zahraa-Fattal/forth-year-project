@@ -1,0 +1,7 @@
+﻿<div style="display:flex;justify-content:end;">
+    <h1 style="text-align:right;">name</h1>
+    <h1 style="text-align:right;margin-left:1rem;">مرحبا</h1>
+</div>
+<h3 style="text-align:right;">اهلا بك في السكن الجامعي</h3>
+<h3 style="text-align:right;">يرجى مراجعة unit</h3>
+<h3 style="text-align:right;">:موعدك هو<br /> date</h3>

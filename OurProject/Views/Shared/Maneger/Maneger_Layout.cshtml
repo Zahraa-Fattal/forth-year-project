@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--  CSS Link -->
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/LinkedCss/Maneger/MainManeger.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Notification/toastr.css" rel="stylesheet" />
+    <!--========== BOX ICONS ==========-->
+
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <link href="~/css/card.css" rel="stylesheet" />
+
+
+
+    <title>manger</title>
+</head>
+@{string noti = "  toastr.options.progressBar = true;" + "toastr.options.closeMethod = 'fadeOut';"
+                        + "toastr.options.closeEasing = 'swing';" + "toastr.options.positionClass = 'toast-bottom-right';"
+                                            + " toastr.options.closeButton = true; "; }
+<body onload="@noti+@Program.JavascriptToRun;" class="add1">
+    <form id="WebGridForm">
+        <header style="background-color: #90AAB9 ">
+            <div class="container mb-2 ">
+                <nav class="navbar navbar-expand-lg navbar-dark pl-0" style="background-color: transparent">
+                    <div class="container-fluid">
+                        <div>
+                            @if (string.IsNullOrEmpty(Program.CurrentUser.Image))
+                            {
+                                <img src="~/img/user.jpg" alt="logo" style=" width: 4rem; border-radius:50%;" class="img-fluid pr-1 pl-1">
+                            }
+                            else
+                            {
+                                <img src="@Program.CurrentUser.Image" alt="logo" style=" width: 4rem;" class="img-fluid pr-1 pl-1">
+                            }
+                            <a class="navbar-brand " href="#"><span class="font-weight-bold fs-4" style="color: #d7dddd">@Program.CurrentUser.Name</span></a>
+                        </div>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-right" style="font-size:22px;">
+                                <li class="nav-item">
+                                    <a class="nav-link  " aria-current="page" asp-area="" asp-controller="Maneger" asp-action="ShowFullInformation">عرض كافة البيانات</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link  " aria-current="page" asp-area="" asp-controller="Maneger" asp-action="EmployeeInfo">عرض الموظفين</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link  " aria-current="page" asp-area="" asp-controller="Maneger" asp-action="AddUnitBtn">إضافة وحدة جديدة</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link  " aria-current="page" asp-area="" asp-controller="Maneger" asp-action="AddUserBtn">إضافة مستخدم جديد</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link  " aria-current="page" asp-area="" asp-controller="Maneger" asp-action="StoreKeeperSettingBtn">أمين مستودع</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-action="SuperVisorSettingBtn" asp-controller="Maneger" class="nav-link">مشرف</a>
+                                </li>
+
+                            </ul>
+                            <div class="nav__icons pl-2">
+                                <a href="#" data-toggle="modal" data-target="#modalTarget" style="color: white; font-size: 29px;" class="nav__icon pr-1"><i class='bx bxs-user'></i></a>
+
+                                <div class="modal fade" id="modalTarget" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content" style="background-color: lightgray  !important;">
+                                            <div class="modal-header" style="display:block;">
+                                                <h5 class="modal-title " id="exampleModalLabel">تسجيل خروج</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                </button>
+                                            </div>
+                                            <div class="modal-body text-right">
+                                                هل تريد تسجيل الخروج
+                                            </div>
+                                            <div class="modal-footer" style="justify-content:space-around;">
+                                                <button asp-controller="Home" asp-action="WelcomeBtnClick" type="submit" class="button_2">نعم</button>
+                                                <button type="button" class="button_2" data-dismiss="modal">لا</button>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="nav__icon" style="color: white; font-size: 29px;" asp-action="HomeBtn" asp-controller="Maneger"><i class='bx bxs-home'></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+    </form>
+    <div class="container" style="overflow:inherit;">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="~/Notification/toastr.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <script src="~/Linkedjs/jquery-3.3.1.slim.min.js"></script>
+    <script src="~/Linkedjs/bootstrap.min.js"></script>
+    <!--========== SCROLL REVEAL ==========-->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="~/js/welcome.js"></script>
+</body>
+</html>

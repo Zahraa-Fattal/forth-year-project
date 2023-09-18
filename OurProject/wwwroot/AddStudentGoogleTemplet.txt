@@ -1,0 +1,7 @@
+﻿<div style="display:flex;justify-content:end;">
+    <h1 style="text-align:right;">name</h1>
+    <h1 style="text-align:right;margin-left:1rem;">مبارك</h1>
+</div>
+<h3 style="text-align:right;">تم تسجيلك في x</h3>
+<h3 style="text-align:right;">يرجى مراجعة امين المستودع لاستلام الادوات</h3>
+

@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewData["Title"] = "DateInformationView";
+    Layout = "~/Views/Shared/Student/Student_Layout.cshtml";
+}
+<link href="~/css/Student/Advance reservation inquiries.css" rel="stylesheet" />
+
+<body class="body___1">
+
+    <div class="wrapper_1">
+        <div class="container___1">
+            <h1>الاستعلام عن موعد  سابق</h1>
+
+            <form class="form___1" id="form">
+            
+                <div class="big">
+                    <input id="NationalNumber" type="password" dir="rtl" placeholder="ادخل رقمك الوطني"  maxlength="11" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                    <small>error</small>
+                </div>
+                
+
+                <button onclick="checkInputs();" type="button" id="login-button" class="btn___1" style="margin-left: 10px; margin-top: 55px;font-size: 20PX; font-weight:800; background-color: #4D4644 !important;">استعلام</button>
+                <button asp-controller="Student" asp-action="AppointmentHomeBtn" type="submit" id="login-button" class="btn___1" style="margin-left: 30px; margin-top: 55px; font-size: 20px; font-weight: 800; background-color: #4D4644;">العودة للشاشة الرئيسية</button>
+            </form>
+        </div>
+
+        <ul class="bg-bubbles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+
+
+    <!-- Button trigger modal -->
+    <button type="button" id="modaltrigger" style="display:none;" class="btn xx btn-primary" data-toggle="modal" data-target="#exampleModal">
+        حجز الموعد
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content model1" style="color:black;">
+                <div class="modal-header" style="justify-content:end;">
+
+
+                    <h3 class="modal-title " id="exampleModalLabel">الموعد</h3>
+
+                </div>
+                <hr style="background-color: #007bff;" />
+                <div class="modal-body text-right" style="font-size:20px">
+                    مرحبا <p id="displayname"></p> <br />
+                    يرجى مراجعة <p id="unitname"></p><br />
+                    موعدك هو <p id="finalDate" style="color: #007bff;"></p>
+                </div>
+                <div class="modal-footer justify-content-center">
+
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal" style="font-size:20px">حسنا</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Button trigger modal -->
+    <button type="button" id="erorremodaltrigger" style="display:none;" class="btn xx btn-primary" data-toggle="modal" data-target="#exampleModal1">
+        حجز الموعد
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content"style="color:black;">
+                <div class="modal-header">
+
+                    <button type="button" class="close text-right" data-dismiss="modal" aria-label="Close">
+                    </button>
+                    <h5 class="modal-title " id="exampleModalLabel">الموعد</h5>
+                </div>
+                <div class="modal-body text-right">
+                    !!! عذرا الرجاء التأكد من صحة رقمك الوطني
+                </div>
+                <div class="modal-footer justify-content-center">
+
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">حسنا</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/jquery-3.2.1.min.js"></script>
+    <script src="~/js/Student/DateInformation.js"></script>
+</body>
+

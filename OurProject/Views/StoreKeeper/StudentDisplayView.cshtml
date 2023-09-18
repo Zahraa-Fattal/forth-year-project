@@ -1,0 +1,100 @@
+﻿@model OurProject.Dto.StudentDto.StudentDisplayDto
+@{
+    ViewData["Title"] = "StudentDisplayView";
+    Layout = "~/Views/Shared/StoreKeeper/StoreKeepr_Layout.cshtml";
+}
+
+<link href="~/css/SuperVisoir/supervisor.css" rel="stylesheet" />
+<body class="body_51">
+    <div class="container home__container">
+        <div class="container">
+            <form asp-action="StudentDisplayView">
+                <div class="search">
+
+                    <input asp-for="@Model.NationalId" type="text" class="searchTerm text-right" style="width:20rem; font-size:20px;" placeholder=" ابحث عن طريق الرقم الوطني " maxlength="11" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+
+
+                    <button asp-controller="StoreKeeper" asp-action="SearchStudents" type="submit" class="searchButton">
+                        <i class='bx bx-search'></i>
+                    </button>
+                </div>
+                <div class="vv">
+                    @if (Program.IsDeleteBegin)
+        {
+            <button asp-controller="StoreKeeper" class="button_2" asp-action="DeleteStudents">حذف جميع الطلاب</button>
+
+        }
+                </div>
+                <div class="row">
+                    @foreach (var item in Model.RecordedStudentsDto)
+                    {
+                        <div class="col-sm-8 col-md-6 col-lg-3 pl-0">
+
+                            <div class="includer  ">
+
+                                <div class="wrapper">
+                                    @if (string.IsNullOrEmpty(item.Image))
+                                    {
+                                        <a>
+                                            <img src="~/img/user.jpg" alt="">
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a>
+                                            <img src="@item.Image" alt="">
+                                        </a>
+                                    }
+                                    <div class="title">
+                                        @item.StudentName
+                                    </div>
+                                    <div class="place">
+                                        @item.NationalId : الرقم الوطني -
+                                    </div>
+                                    <div class="place">
+                                        @item.UniversityId : الرقم الجامعي -
+                                    </div>
+
+                                </div>
+                                <div class="content">
+
+
+                                    <div class="buttons">
+                                        <input type="hidden" asp-for="@Model.StudentId" value="@item.studentId" />
+                                        @if (Program.IsDeleteBegin == false)
+                                        {
+                                            <button type="submit" asp-action="AddStudent" asp-controller="StoreKeeper" asp-route-id="@item.studentId" class="bbtn">تفاصيل</button>
+
+                                        }
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    }
+
+
+                </div>
+            </form>
+
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+    <script src="~/js/jquery-3.2.1.min.js"></script>
+
+</body>
+

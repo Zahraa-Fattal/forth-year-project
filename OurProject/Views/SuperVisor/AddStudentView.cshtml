@@ -1,0 +1,222 @@
+﻿@model OurProject.Dto.StudentDto.AssignStudentDto
+@{
+    ViewData["Title"] = "AddStudentView";
+    Layout = "~/Views/Shared/SuperVisor/SuperVisorAddStudent_Layout.cshtml";
+}
+
+<link href="~/css/SuperVisoir/supervisor'sAdd.css" rel="stylesheet" />
+<body  class="body7">
+    <div class="container" style="display:flex;justify-content:center;">
+        <div dir="rtl" class="includer">
+            <div class="title" style="text-align:right ;">احجز غرفة</div>
+            <div class="content">
+                <form id="form" asp-action="AddStudentView">
+                    <input hidden value="@Model.SpecificStudentDto.studentId" asp-for="@Model.StudentId" />
+                    <input hidden value="@Model.SpecificStudentDto.Email" asp-for="@Model.Email" />
+                    <input id="oldSuggestedUnitId" hidden value="@Model.SpecificStudentDto.SuggestedUnitId" asp-for="@Model.SuggestedUnitId" />
+                    <div class="user-details">
+                        @*Name*@
+                        <div class="input-box">
+                            <div class="big">
+                                <span class="details" style="text-align:right ;">الاسم الكامل</span>
+                                <input id="name" type="text" asp-for="@Model.addStudentDto.Name" value="@Model.SpecificStudentDto.studentName" placeholder="أدخل اسمك" required style="padding-right:10px ;">
+                                <small>error</small>
+                            </div>
+                        </div>
+                        @*StudyBranch*@
+                        <div class="input-box">
+                            <input hidden id="StudyBranchValue" value="@Model.SpecificStudentDto.StudyBranchId" />
+                            <div class="big">
+                                <span class="details" style="text-align:right ;">اختر الفرع الدراسي</span>
+
+                                <select id="StudyBranch" onchange="getFreeRooms();" asp-for="@Model.addStudentDto.StudyBranchId" style="padding:10px;">
+                                    <option value="-1">لايوجد</option>
+                                    @foreach (var item in Model.getAllStudyBranchDtos)
+                                    {
+                                        <option value="@item.id">@item.Name</option>
+                                    }
+                                </select>
+
+                                <small>error</small>
+                            </div>
+                        </div>
+                        @*UniversityId*@
+                        <div class="input-box">
+                            <div class="big">
+                                <span class="details" style="text-align:right ;">الرقم الجامعي</span>
+                                <input id="UniversityId" asp-for="@Model.addStudentDto.UniversityId" type="number" value="@Model.SpecificStudentDto.UniversityId" placeholder="أدخل الرقم الجامعي" required style="padding-right:10px ;"maxlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                                <small>error</small>
+                            </div>
+                        </div>
+                        @*MainCity*@
+                        <div class="input-box">
+
+                            <div class="big">
+                                <span class="details" style="text-align:right ;">اختر المحافظة</span>
+
+                                @if (Model.SpecificStudentDto.mainCityName != null)
+                                {
+                                    <input hidden id="MainCityValue" value="@Model.SpecificStudentDto.MainCity" />
+
+                                }
+                                else
+                                {
+                                    <input hidden id="MainCityValue" value="@Model.SpecificStudentDto.studentCityId" />
+
+                                }
+                                <select asp-for="@Model.mainCity" id="mainCity" onchange="getCountry();" style="padding:10px;" tabindex="4">
+                                    <option value="-1">لايوجد</option>
+                                    @foreach (var item in Model.getMainCityDtos)
+                                    {
+                                        <option value="@item.Id">@item.mainCityName</option>
+                                    }
+                                </select>
+
+                                <small>error</small>
+                            </div>
+                        </div>
+                        @*NationalId*@
+                        <div class="input-box">
+                            <div class="big">
+                                <span class="details" style="text-align:right ;">الرقم الوطني</span>
+                                <input id="NationalId" type="number" asp-for="@Model.addStudentDto.NationalId" value="@Model.SpecificStudentDto.NationalId" placeholder="أدخل الرقم الوطني" required style="padding-right:10px ;"maxlength="11" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                                <small>error</small>
+                            </div>
+                        </div>
+                        @*Country*@
+                        <div class="input-box">
+                            @if (Model.SpecificStudentDto.mainCityName != null)
+                            {
+                                <input hidden id="CountryValue" value="@Model.SpecificStudentDto.studentCityId" />
+
+                            }
+                            else
+                            {
+                                <input hidden id="CountryValue" value="-1" />
+
+                            }
+                            <div class="big">
+                                <span class="details" style="text-align:right ;">اختر الناحية</span>
+
+
+                                <select asp-for="@Model.Contry" id="country" style="padding:10px;">
+                                    <option value="-1">لايوجد</option>
+
+                                </select>
+
+                                <small>error</small>
+                            </div>
+                        </div>
+                        @*PhoneNumber*@
+                        <div class="input-box">
+                            <div class="big">
+                                <span class="details" style="text-align:right ;">رقم الهاتف</span>
+                                <input id="PhoneNumber" type="number" asp-for="@Model.addStudentDto.PhoneNumber" value="@Model.SpecificStudentDto.PhoneNumber" placeholder="أدخل رقم الهاتف" required style="padding-right:10px ;">
+                                <small>error</small>
+                            </div>
+                        </div>
+                        @*Rooms*@
+                    <div class="input-box">
+                        @if (Model.SpecificStudentDto.RoomName != null)
+                        {
+                            <input asp-for="@Model.OldRoomId" hidden id="RoomValue" value="@Model.SpecificStudentDto.unitRoomId" />
+                            <input hidden id="RoomNameValue" value="@Model.SpecificStudentDto.RoomName" />
+
+                        }
+                        else
+                        {
+                            <input hidden id="RoomValue" value="-1" />
+
+                        }
+                        <div class="big">
+                            <span class="details" style="text-align:right ;">اختر الغرفة</span>
+
+
+                            <select id="Room" asp-for="@Model.addStudentDto.UnitRoomFk" style="padding:10px;">
+                                <option style="color:#000000"  value="-1">لايوجد</option>
+                                @foreach (var item in Model.FreeRoomDtos)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+
+                            <small>error</small>
+                        </div>
+                    </div>
+                    </div>
+                    @if (Model.SpecificStudentDto.Gender)
+                    {
+                        <div class="gender-details" style="display:table;">
+                            <input type="hidden" id="gender" value="@Model.SpecificStudentDto.Gender" asp-for="@Model.addStudentDto.Gender" />
+                            <div class="big">
+
+
+                                <input name="gender" onchange="getFreeRooms();" value="@Model.SpecificStudentDto.Gender" type="radio" id="dot-1" checked>
+                                <input name="gender" onchange="getFreeRooms();" value="@Model.SpecificStudentDto.Gender" type="radio" id="dot-2">
+
+
+
+                                <div class="category">
+                                    <label for="dot-1">
+                                        <span class="dot one" style="margin-left: 5px;"></span>
+                                        <span class="gender">ذكر</span>
+
+                                    </label>
+                                    <label for="dot-2">
+                                        <span class="dot two" style="margin-left: 5px;"></span>
+                                        <span class="gender">أنثى</span>
+                                    </label>
+
+                                </div>
+                                <small style="float:right;">error</small>
+                            </div>
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="gender-details" style="display:table;">
+                            <input type="hidden" id="gender" value="@Model.SpecificStudentDto.Gender" asp-for="@Model.addStudentDto.Gender" />
+                            <div class="big">
+
+
+                                <input name="gender" onchange="getFreeRooms();" value="@Model.SpecificStudentDto.Gender" type="radio" id="dot-1">
+                                <input name="gender" onchange="getFreeRooms();" value="@Model.SpecificStudentDto.Gender" type="radio" id="dot-2" checked>
+
+
+
+                                <div class="category">
+                                    <label for="dot-1">
+                                        <span class="dot one" style="margin-left: 5px;"></span>
+                                        <span class="gender">ذكر</span>
+
+                                    </label>
+                                    <label for="dot-2">
+                                        <span class="dot two" style="margin-left: 5px;"></span>
+                                        <span class="gender">أنثى</span>
+                                    </label>
+
+                                </div>
+                                <small style="float:right;">error</small>
+                            </div>
+
+                        </div>
+                    }
+
+                    <div class="bbtn">
+                        <div class="button">
+                            <input onclick="checkInputs();" type="button" value="تسجيل الطالب">
+                            <button id="addStudent" style="display:none;" asp-controller="SuperVisor" asp-action="AddStudentBtn"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="~/js/jquery-3.2.1.min.js"></script>
+    <script src="~/js/SuperVisoir/SelectDefaultValue.js"></script>
+</body>
+

@@ -1,0 +1,425 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Jost', sans-serif;
+    scroll-behavior: smooth;
+  }
+  body {
+    overflow: hidden;
+    margin: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+      
+  :root{
+    --main-color:#90AAB9;
+    --dark-main-color:#1a5086;
+ 
+    --brown-color:#4D4644;
+    --text-color:#d7dddd;
+  }
+.big.error input {
+    border: 2px solid #e74c3c;
+}
+
+.big.correct input {
+    border: 2px solid #2ecc71;
+}
+
+.big.error select {
+    border: 2px solid #e74c3c;
+}
+
+.big.correct select {
+    border: 2px solid #2ecc71;
+}
+
+.big small {
+    visibility: hidden;
+    font-size: inherit;
+    bottom: 0;
+    left: 0;
+}
+
+.big.error small {
+    visibility: visible;
+    color: #e74c3c;
+}
+
+.big.correct small {
+    visibility: hidden;
+    color: #2ecc71;
+}
+
+/*admin*/
+
+
+.mainTable{
+	text-align: center;
+	margin-top: 10px;
+  
+}
+
+#table {
+    margin: 5px auto;
+    width: max-content;
+}
+table tr:not(:first-child){
+	cursor: pointer;
+	transition: all .25s ease-in-out;
+}
+table tr:not(:first-child):hover{
+	background-color: #ddd;
+}
+
+table{
+    width: 60%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+tr:nth-child(odd){
+    background-color: lightgray;
+}
+
+
+
+     
+     @media(max-width:1014px){
+       .admin .b1{
+         display: none;
+       }
+     }
+     @media(max-width:1014px){
+      .admin {
+        background-repeat: no-repeat;
+        background-size: cover;  
+          
+      }
+    }
+  
+    @media screen and (max-width:350px)  {
+      .bb{
+        width: 9rem !important;
+      }
+        .num{
+          width:2rem;
+
+        }
+      }
+      
+      
+    /* admin sitting */
+    @media(max-width:860px){
+      .mainTable{
+        margin-top: 50px;
+      }
+    }
+    @media(max-width:680px){
+.editTable{
+  position: relative;
+  left: -10px;
+}
+.editTable .left{
+  right: -10px;
+  position: relative;
+}
+    }
+    @media(max-width:580px){
+      .editTable{
+        position: relative;
+        left: -20px;
+      }
+      .editTable .left{
+        right: -30px;
+        position: relative;
+      }
+          }
+          @media(max-width:530px){
+.editTable .left{
+              right: -50px;
+              position: relative;
+            }
+          }
+          @media(max-width:450px){
+            .editTable{
+              position: relative;
+              left: -30px;
+            }
+            .editTable .left{
+              right: -80px;
+              position: relative;
+            }
+                }
+    @media(max-width:450px){
+       .editTable{
+           position: relative;
+           left: -40px;
+             }
+             .editTable .left{
+              right: -40px;
+              position: relative;
+            }
+      }
+      @media(max-width:315px){
+        .editTable{
+            position: relative;
+          
+
+              }
+              .editTable input{
+               width: 150px;
+                
+                  }
+                  .editTable .left{
+                    right: -70px;
+                    position: relative;
+                  }
+       }
+       @media(max-width:265px){
+       .admin .navbar-toggler{
+          right: -180px;
+           position: relative;
+           top: -45px;
+         }}
+       @media(max-width:240px){
+        .editTable .left{
+         font-size: 15px;
+         right: -80px;
+          position: relative;
+        }
+       }
+     /* admin sitting */
+    
+    
+    
+      /* admin */
+
+/*end*/  
+  
+.button-2 {
+  font-weight: 600;
+  border: none;
+  width: 140px;
+  height: 40px;
+  
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background:#1a5086 ; 
+  font-size: 20px;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: "Muli-SemiBold";
+  border-radius: 20px;
+  overflow: hidden;
+  -webkit-transform: perspective(1px) translateZ(0);
+
+  position: relative;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s; }
+  button:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: none;
+    color: #1a5086;
+    background:lightgray;;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: 0 50%;
+    transform-origin: 0 50%;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out; }
+  button:hover:before {
+    
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+    transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66); }
+
+button:hover{
+  color: #1a5086 !important;
+}
+
+
+
+    /*model*/
+   
+    
+    .login-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 400px;
+      padding: 40px;
+      transform: translate(-50%, -50%);
+      background: lightgray;
+      box-sizing: border-box;
+  
+      border-radius: 10px;
+    }
+    
+    .login-box h2 {
+      margin: 0 0 30px;
+      padding: 0;
+      color:#1a5086;
+      text-align: center;
+    }
+    
+    .login-box .user-box {
+      position: relative;
+    }
+    
+    .login-box .user-box input {
+      width: 100%;
+      padding: 10px 0;
+      font-size: 16px;
+      color: #fff;
+      margin-bottom: 30px;
+      border: none;
+      border-bottom: 1px solid #fff;
+      outline: none;
+      background: transparent;
+    }
+    .login-box .user-box label {
+      position: absolute;
+      top: 0;
+      left: 70%;
+      padding: 10px 0;
+      font-size: 16px;
+      color: var(--dark-main-color);
+      width: 40%;
+      pointer-events: none;
+      transition: 0.5s;
+    }
+    
+    .login-box .user-box input:focus ~ label,
+    .login-box .user-box input:valid ~ label {
+      top: -20px;
+      left: 70%;
+      color: #fff;
+      font-size: 15px;
+    }
+    
+    .login-box form button {
+      position: relative;
+      display: inline-block;
+      padding: 10px 20px;
+      color:var(--dark-main-color);
+      font-size: 16px;
+      text-decoration: none;
+      text-transform: uppercase;
+      overflow: hidden;
+      transition: 0.5s;
+      margin-top: 40px;
+    }
+    
+    .login-box button:hover {
+      background: var(--main-color);
+      color: white;
+      border-radius: 5px;
+      box-shadow: 0 0 5px #1a5086, 0 0 25px #1a5086, 0 0 50px #1a5086,
+        0 0 100px #1a5086;
+    }
+    
+    .login-box button span {
+      position: absolute;
+      display: block;
+    }
+    
+    .login-box button span:nth-child(1) {
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #1a5086);
+      animation: btn-anim1 1s linear infinite;
+    }
+    
+    @keyframes btn-anim1 {
+      0% {
+        left: -100%;
+      }
+      50%,
+      100% {
+        left: 100%;
+      }
+    }
+    
+    .login-box button span:nth-child(2) {
+      top: -100%;
+      right: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, #1a5086);
+      animation: btn-anim2 1s linear infinite;
+      animation-delay: 0.25s;
+    }
+    
+    @keyframes btn-anim2 {
+      0% {
+        top: -100%;
+      }
+      50%,
+      100% {
+        top: 100%;
+      }
+    }
+    
+    .login-box button span:nth-child(3) {
+      bottom: 0;
+      right: -100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(270deg, transparent, #1a5086);
+      animation: btn-anim3 1s linear infinite;
+      animation-delay: 0.5s;
+    }
+    
+    @keyframes btn-anim3 {
+      0% {
+        right: -100%;
+      }
+      50%,
+      100% {
+        right: 100%;
+      }
+    }
+    
+    .login-box button span:nth-child(4) {
+      bottom: -100%;
+      left: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(360deg, transparent, #1a5086);
+      animation: btn-anim4 1s linear infinite;
+      animation-delay: 0.75s;
+    }
+    
+    @keyframes btn-anim4 {
+      0% {
+        bottom: -100%;
+      }
+      50%,
+      100% {
+        bottom: 100%;
+      }
+    }
+    

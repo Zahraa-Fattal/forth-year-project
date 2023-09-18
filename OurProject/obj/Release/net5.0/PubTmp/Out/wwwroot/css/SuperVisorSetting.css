@@ -1,0 +1,109 @@
+﻿admin
+
+
+.mainTable {
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.table td, .table th {
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-top: 1px solid #dee2e6;
+}
+table tr:not(:first-child) {
+    cursor: pointer;
+    transition: all .25s ease-in-out;
+}
+
+    table tr:not(:first-child):hover {
+        background-color: #ddd;
+    }
+
+table {
+    width: 60%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+tr:nth-child(odd) {
+    background-color: lightgray;
+}
+
+/*Data Update Button */
+
+.updateBtn button:hover {
+    background: lightgray;
+    color: black;
+    transition: .5s;
+}
+
+/*Data Update Table*/
+.editTable {
+    display: none;
+    padding-top: 20px;
+    width: 30%;
+    margin: 0 auto;
+}
+
+.left {
+    float: right;
+    font-weight: 600;
+    color: #000133;
+}
+
+.right {
+    float: left;
+}
+
+.editRowBtn {
+    background-color: #000133 !important;
+    color: white;
+    border: 1px solid black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 10rem;
+}
+
+    .editRowBtn:hover {
+        background-color: lightgray;
+        color: black;
+        transition: .5s;
+    }
+
+
+/*end*/
+.btn {
+    display: inline-block;
+    margin-top: 2%;
+    padding: .7rem 2.5rem;
+    font-size: 1.5rem;
+    border-radius: .5rem;
+    color: rgb(228, 228, 240) !important;
+    position: relative;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+    overflow: hidden;
+    z-index: 0;
+}
+
+    .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        clip-path: polygon(0 0, 100% 0, 10% 25%, 0 100%);
+        z-index: -1;
+        background: rgb(228, 228, 240);
+        transition: .3s cubic-bezier(.38,1.15,.7,1.12);
+    }
+
+    .btn:hover:before {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .btn:hover {
+        color: black !important;
+    }

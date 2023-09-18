@@ -1,0 +1,15 @@
+C:\Users\Wael\Desktop\OurProject\OurProject.IRepo\bin\Release\net5.0\OurProject.IRepo.deps.json
+C:\Users\Wael\Desktop\OurProject\OurProject.IRepo\bin\Release\net5.0\OurProject.IRepo.dll
+C:\Users\Wael\Desktop\OurProject\OurProject.IRepo\bin\Release\net5.0\ref\OurProject.IRepo.dll
+C:\Users\Wael\Desktop\OurProject\OurProject.IRepo\bin\Release\net5.0\OurProject.IRepo.pdb
+C:\Users\Wael\Desktop\OurProject\OurProject.IRepo\bin\Release\net5.0\OurProject.Dto.dll
+C:\Users\Wael\Desktop\OurProject\OurProject.IRepo\bin\Release\net5.0\OurProject.Dto.pdb
+C:\Users\Wael\Desktop\OurProject\OurProject.IRepo\obj\Release\net5.0\OurProject.IRepo.csproj.AssemblyReference.cache
+C:\Users\Wael\Desktop\OurProject\OurProject.IRepo\obj\Release\net5.0\OurProject.IRepo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Wael\Desktop\OurProject\OurProject.IRepo\obj\Release\net5.0\OurProject.IRepo.AssemblyInfoInputs.cache
+C:\Users\Wael\Desktop\OurProject\OurProject.IRepo\obj\Release\net5.0\OurProject.IRepo.AssemblyInfo.cs
+C:\Users\Wael\Desktop\OurProject\OurProject.IRepo\obj\Release\net5.0\OurProject.IRepo.csproj.CoreCompileInputs.cache
+C:\Users\Wael\Desktop\OurProject\OurProject.IRepo\obj\Release\net5.0\OurProject.IRepo.csproj.CopyComplete
+C:\Users\Wael\Desktop\OurProject\OurProject.IRepo\obj\Release\net5.0\OurProject.IRepo.dll
+C:\Users\Wael\Desktop\OurProject\OurProject.IRepo\obj\Release\net5.0\ref\OurProject.IRepo.dll
+C:\Users\Wael\Desktop\OurProject\OurProject.IRepo\obj\Release\net5.0\OurProject.IRepo.pdb

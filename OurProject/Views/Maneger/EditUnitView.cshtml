@@ -1,0 +1,168 @@
+﻿@model OurProject.Dto.UnitDto.UpdateUnitDto
+@{
+    ViewData["Title"] = "EditUnitView";
+    Layout = "~/Views/Shared/Maneger/EditUnit_Layout.cshtml";
+}
+
+
+<div class="page-content">
+    <div class="form-v7-content">      
+        <div class="form-left order-1">
+            <img src="@Model.UnitDto.Image" alt="Unit_Pic"  id="image" onclick="document.getElementById('inputFile').click()" style="height: 80%; margin-top: -2rem;" >
+
+        </div>
+        <form class="form-detail  text-right" action="#" method="post" id="form" style="font-weight: 600; ">
+            <input type="hidden" value="@Model.UnitDto.UnitId" asp-for="@Model.UnitId" />
+            <p class="text-1 text-center" style="color: #1a5086; margin-top: -10%; font-size: 30px;">تعديل بيانات الوحدة</p>
+            @*<div class="form-wrapper" style="padding-bottom: 10%;">
+                    <label for="" class="text-right" style="color:#1a5086; font-size: 20px; font-weight: 700;">:اسم  الوحدة</label>
+                    <input type="text" class="form-control" value="" style="background-color: #90AAB9;" dir="rtl" required>
+                </div>*@
+            @*Add Name*@
+            <div class=" mb-0">
+                <div class="big">
+                    <label asp-for="@Model.UnitDto.UnitName" class="text-right" style="color: #1a5086; font-size: 20px; font-weight: 700;">:اسم الوحدة</label>
+                    <input value="@Model.UnitDto.UnitName" asp-for="@Model.AddUnitDto.Name" type="text" id="name" class="form-control col" style="background-color: #90AAB9;" dir="rtl">
+                    <input value="@Model.UnitDto.Image" asp-for="@Model.AddUnitDto.Image" type="hidden" id="oldImage" class="form-control col" style="background-color: #90AAB9;" dir="rtl">
+                    <small>error</small>
+
+                </div>
+            </div>
+            @*<div class="form-row ">
+
+                    <div class=" dropdown ">
+                        <a class="btn  btn-secondary dropdown-toggle " href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #90AAB9;font-size: 20px; ">
+                            اختر مشرفا
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">اداب</a></li>
+                            <li><a class="dropdown-item" href="#">طب</a></li>
+                            <li><a class="dropdown-item" href="#">هندسة</a></li>
+                        </ul>
+
+                    </div>
+                </div>*@
+            @*Add Super Visor*@
+            <div class="">
+                <div class="dropdown">
+                    <div class="big">
+                        <label asp-for="@Model.UnitDto.SuperVisorId" class="control-label text-right " style="color: #1a5086; font-size: 20px; font-weight: 700;">اختر مشرف</label>
+                        <input id="superVersionId" hidden value="@Model.UnitDto.SuperVisorId" />
+                        <select asp-for="@Model.AddUnitDto.UserSuperVisorFk" id="superVisor" class="form-select  text-white text-right " style="background-color: #90AAB9;" aria-labelledby="dropdownMenuLink" required>
+                            <option class="text-white" value="-1">لايوجد</option>
+                            <option class="text-white" value="@Model.UnitDto.SuperVisorId">@Model.UnitDto.SuperVisorName</option>
+                            @foreach (var item in Model.SuperVisors)
+                            {
+                                <option value="@item.SuperVisorId">@item.SuperVisorName</option>
+                            }
+                        </select>
+                        <small>error</small>
+                    </div>
+                </div>
+            </div>
+            @*Add Store Keeper*@
+            <div class="">
+                <div class="dropdown">
+                    <div class="big">
+                        <label asp-for="@Model.UnitDto.StoreKeeperId" class="control-label text-right " style="color: #1a5086; font-size: 20px; font-weight: 700;">اختر أمين مستودع</label>
+                        <input id="StoreKeeperId" hidden value="@Model.UnitDto.StoreKeeperId" />
+                        <select asp-for="@Model.AddUnitDto.UserUnitStoreKeeperFk" id="storeKeeper" class="form-select  text-white text-right " style="background-color: #90AAB9;" aria-labelledby="dropdownMenuLink" required>
+                            <option class="text-white" value="-1">لايوجد</option>
+                            <option class="text-white" value="@Model.UnitDto.StoreKeeperId">@Model.UnitDto.StoreKeeperName</option>
+                            @foreach (var item in Model.StoreKeepers)
+                            {
+                                <option value="@item.StoreKeeperId">@item.StoreKeeperName</option>
+                            }
+                        </select>
+                        <small>error</small>
+                    </div>
+                </div>
+            </div>
+            @*Add Store*@
+            <div class="">
+                <div class="dropdown">
+                    <div class="big">
+                        <label asp-for="@Model.UnitDto.unitStoresId" class="control-label text-right " style="color: #1a5086; font-size: 20px; font-weight: 700;">اختر مستودع</label>
+                        <input id="StoreId" hidden value="@Model.UnitDto.unitStoresId" />
+                        <select asp-for="@Model.AddUnitDto.UnitStoreFk" id="store" class="form-select  text-white text-right " style="background-color: #90AAB9;" aria-labelledby="dropdownMenuLink" required>
+                            <option class="text-white" value="-1">لايوجد</option>
+                            <option class="text-white" value="@Model.UnitDto.unitStoresId">@Model.UnitDto.unitStoreName</option>
+                            @foreach (var item in Model.unitStores)
+                            {
+                                <option value="@item.unitStoresId">@item.unitStoresName,</option>
+                            }
+                        </select>
+                        <small>error</small>
+                    </div>
+                </div>
+            </div>
+
+            @*Add Study Branch*@
+            <div class="">
+                <div class="dropdown">
+                    <div class="big">
+                        <label asp-for="@Model.UnitDto.studyBranchesId" class="control-label text-right " style="color: #1a5086; font-size: 20px; font-weight: 700;">اختر فرع دراسي</label>
+                        <input id="StudyBranchId" hidden value="@Model.UnitDto.studyBranchesId" />
+                        <select asp-for="@Model.AddUnitDto.StudyBranchEntityId" id="StudyBranch" class="form-select  text-white text-right " style="background-color: #90AAB9;" aria-labelledby="dropdownMenuLink" required>
+                            <option class="text-white" value="-1">لايوجد</option>
+                            @foreach (var item in Model.studyBranchs)
+                            {
+                                <option value="@item.id">@item.Name</option>
+                            }
+                        </select>
+                        <small>error</small>
+                    </div>
+                </div>
+            </div>
+            @*Add Image*@
+        <div class="form-group  col-sm-12 " style="display:contents;">
+            <input id="inputFile" onchange="fileSelectedChanged(this,'submitbtn','userImage','Users\\','save-image')" type="file" accept=".jpg,.png,.jpeg,.bmp,.gif" class="form-control  " style="display:none;" />
+            <input asp-for="@Model.AddUnitDto.Image" id="save-image"  type="hidden" />
+        </div>
+
+            @if (Model.UnitDto.Gender)
+            {
+                <div class="form-check form-switch" style="font-size: 20px; margin-left: 70%; padding-top: 10%; color:#90AAB9; ">
+                    <input id="male" asp-for="@Model.male" class="form-check-input" type="checkbox" checked>
+                    <input id="gender" hidden />
+                    <label class="form-check-label" for="flexSwitchCheckDefault">ذكر</label>
+                </div>
+                <div class="form-check form-switch" style="font-size: 20px; margin-left: 70%; color:#90AAB9; ">
+                    <input id="female" asp-for="@Model.female" class="form-check-input" type="checkbox">
+                    <input id="gender" hidden />
+                    <label class="form-check-label" for="flexSwitchCheckChecked">انثى</label>
+                </div>
+            }
+            else
+            {
+                <div class="form-check form-switch" style="font-size: 20px; margin-left: 70%; padding-top: 10%; color:#90AAB9; ">
+                    <input id="male" asp-for="@Model.male" class="form-check-input" type="checkbox">
+                    <input id="gender" hidden />
+                    <label class="form-check-label" for="flexSwitchCheckDefault">ذكر</label>
+                </div>
+                <div class="form-check form-switch" style="font-size: 20px; margin-left: 70%; color:#90AAB9; ">
+                    <input id="female" asp-for="@Model.female" class="form-check-input" type="checkbox" checked>
+                    <input id="gender" hidden />
+                    <label class="form-check-label" for="flexSwitchCheckChecked">انثى</label>
+                </div>
+            }
+
+
+            <div class="form-row-last">
+
+                <button onclick="return checkInputs();" asp-controller="Maneger" asp-action="UpdateUnit" type="submit" class="register">تعديل</button>
+
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<!--Bootstrap JS-->
+<script src="~/js/updateunit.js"></script>
+<script src="~/js/test.js"></script>
+<script src="~/js/Validation/UpdateUnitValidation.js"></script>
+<script src="~/js/jquery-3.2.1.min.js"></script>
+<script src="~/js/Upload.js"></script>
+

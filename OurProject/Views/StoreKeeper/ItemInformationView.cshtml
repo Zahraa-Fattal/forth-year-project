@@ -1,0 +1,148 @@
+﻿@model OurProject.Dto.AccessoryDto.ItemInformationDto
+@{
+    ViewData["Title"] = "ItemInformationView";
+    Layout = "~/Views/Shared/StoreKeeper/StoreKeepr_Layout.cshtml";
+}
+<link href="~/css/AddUserImage.css" rel="stylesheet" />
+<link href="~/css/StoreKeeper/workhouseGuard.css" rel="stylesheet" />
+<body class="body8 ">
+
+    <div class="container  ">
+        <h1 style="text-align: center; color: #4D4644; font-size:30px">المحتويات والاعداد في المستودع</h1>
+        <div class="row ">
+            @foreach (var item in Model.getAccessoriesDetailsDtos)
+            {
+                int i = item.StoreDetailsId;
+                string modalUpdateTarget = "example" + i;
+                string saveimage = "save-image" + i;
+                <div data-toggle="modal" data-target="#@modalUpdateTarget" class=" col-sm-12 col-md-6 col-lg-4 pl-0">
+
+                    <div class="includer">
+                        <img src="@item.Image" alt="">
+                        <div class="overlay">
+                            <div class="items"></div>
+                            <div class="items head">
+                                <p>@item.ItemName</p>
+                                <hr dir="rtl">
+                            </div>
+                            <div class="items price">
+
+                                <p class="new">العدد : @item.Amount </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="@modalUpdateTarget" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+
+
+
+                            <div class="login-box">
+                                <h2>تعديل الادوات</h2>
+                                <form id="form">
+                                    <div class="user-box">
+                                        <div class="big">
+                                            <label asp-for="@Model.AddAccessoryDto.Image" style=" font-size: 22px; margin-bottom:29rem;">صورة الأداة</label>
+                                            <input id="file-upload" onchange="fileSelectedChanged(this, 'submitbtn', 'userImage', 'Users\\','@saveimage')" type="file" accept=".jpg,.png,.jpeg,.bmp,.gif" class="input">
+                                            <input id="@saveimage" type="hidden" asp-for="@Model.AddAccessoryDto.Image" />
+                                        </div>
+                                    </div>
+                                    <div class="user-box ">
+                                        <div class="big">
+                                            <input  type="hidden" asp-for="@Model.StoreDetailsId" value="@item.StoreDetailsId" />
+                                            <input  type="hidden" asp-for="@Model.AccessoriesId" value="@item.AccessoriesId" />
+                                            <input value="@item.ItemName" asp-for="@Model.AddAccessoryDto.Name" style="color: #1a5086;" type="text" dir="rtl" autocomplete="off">
+                                            <label asp-for="@Model.AddAccessoryDto.Name"style="font-size: 22px; ">اسم الأداة</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="user-box ">
+                                        <div class="big">
+                                            <input value="@item.Amount" asp-for="@Model.Amount" style="color: #1a5086;" type="number" dir="rtl" autocomplete="off">
+                                            <label asp-for="@Model.Amount" style=" font-size: 22px; ">كمية الأداة</label>
+                                        </div>
+
+                                    </div>
+                                    <button style="border:none;border-radius:8px;" asp-controller="StoreKeeper" asp-action="UpdateItem" type="submit">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        تعديل
+                                    </button>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div data-toggle="modal" data-target="#modalUpdateTarget" class=" col-sm-12 col-md-6 col-lg-4 pl-0">
+                <div class="includer">
+                    <img src="~/img/add.jpg" alt="" style="background-color:aliceblue;">
+                    <div class="overlay">
+
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="modalUpdateTarget" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+
+
+
+                        <div class="login-box">
+                            <h2>أضافة أداة جديدة</h2>
+                            <form id="form">
+                                <div class="user-box">
+                                    <div class="big">
+                                        <label asp-for="@Model.AddAccessoryDto.Image" style=" font-size: 22px">صورة الأداة</label>
+                                        <input id="file-upload" onchange="fileSelectedChanged(this,'submitbtn','userImage','Users\\','save')" type="file" accept=".jpg,.png,.jpeg,.bmp,.gif" class="input">
+                                        <input id="save" type="hidden" asp-for="@Model.AddAccessoryDto.Image" />
+                                    </div>
+                                    <div class="user-box ">
+                                        <div class="big">
+                                            <input asp-for="@Model.AddAccessoryDto.Name" style="color: #1a5086;" type="text" dir="rtl" autocomplete="off">
+                                            <label asp-for="@Model.AddAccessoryDto.Name" style=" font-size: 22px; margin-bottom:29rem;">اسم الأداة</label>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="user-box ">
+                                    <div class="big">
+                                        <input asp-for="@Model.Amount" style="color: #1a5086;" type="number" dir="rtl" autocomplete="off">
+                                        <label asp-for="@Model.Amount" style=" font-size: 22px; ">كمية الأداة</label>
+                                    </div>
+
+                                </div>
+                                <button style="border:none;border-radius:8px;" asp-controller="StoreKeeper" asp-action="AddNewItem" type="submit">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    حفظ
+                                </button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <script src="~/js/jquery-3.2.1.min.js"></script>
+    <script src="~/js/Upload.js"></script>
+</body>
+

@@ -1,0 +1,95 @@
+﻿@model OurProject.Dto.UserDto.AddNewUserDto
+@{
+    ViewData["Title"] = "AddUserView";
+    Layout = "~/Views/Shared/Maneger/AddUser_Layout.cshtml";
+}
+<form asp-action="AddUserView" id="form">
+    <div class="container33 center mt-lg-n5" style="align-content:baseline;">
+        <div class="card33" style=" text-align: right;">
+            <div class="row">
+                <div class="col">
+                    @*Add Image*@
+                    <div class="avatar-upload">
+                        <div class="avatar-edit">
+                            <input id="inputFile" onchange="fileSelectedChanged(this,'submitbtn','userImage','Users\\','save-image')" type="file" accept=".jpg,.png,.jpeg,.bmp,.gif" class="form-control  " style="display:none;" />
+                            <input type="hidden" asp-for="@Model.userDto.Image" id="save-image" />
+                            <label onclick="document.getElementById('inputFile').click()"><i style="padding-right:6px;" class='bx bxs-edit-alt'></i></label>
+                        </div>
+                        <div class="avatar-preview">
+                            <img src="~/img/user.jpg" id="imagePreview"  />
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <h2 style="color: #000133;">أضف موظف جديد</h2>
+                </div>
+            </div>
+
+
+            <hr />
+            @*Add UserName*@
+            <div class="mb-0">
+                <div class="big">
+                    <label asp-for="@Model.userDto.UserName" class="text-right" style=" font-weight: 700;">:البريد الإلكتروني</label>
+                    <input asp-for="@Model.userDto.UserName" type="email" style="font-size:large;" id="Username" class=" col" dir="rtl">
+                    <small>error</small>
+                </div>
+            </div>
+            @*Add Name*@
+            <div class="mb-0">
+                <div class="big">
+                    <label asp-for="@Model.userDto.Name" class="text-right" style=" font-weight: 700;">:اسم الموظف</label>
+                    <input asp-for="@Model.userDto.Name" type="text" style="font-size:large;" id="name" class=" col" dir="rtl">
+                    <small>error</small>
+                </div>
+            </div>
+            @*Add Roll*@
+            <div class="pb-2">
+                <div class="">
+                    <div class="big">
+                        <label asp-for="@Model.userDto.RoleId" class="control-label text-right " style=" font-weight: 700;">اختر نوع الموظف</label>
+                        <select asp-for="@Model.userDto.RoleId" style="font-size:large;" id="Roll" class=" form-select  text-right ">
+                            <option selected value="-1">لايوجد</option>
+                            @foreach (var item in Model.getAllRoles)
+                            {
+                                <option value="@item.id">@item.Name</option>
+                            }
+                        </select>
+                        <small>error</small>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            @*Add Phone Number*@
+            <div class="mb-0">
+                <div class="big">
+                    <label asp-for="@Model.userDto.PhoneNumber" class="text-right" style=" font-weight: 700;">:رقم الهاتف</label>
+                    <input asp-for="@Model.userDto.PhoneNumber" type="number" style="font-size:large;" id="PhoneNumber" class=" col" dir="rtl">
+                    <small>error</small>
+                </div>
+            </div>
+
+
+            @*Add Date*@
+            <div class="mb-0">
+                <div class="big">
+                    <label asp-for="@Model.userDto.Date" class="text-right" style=" font-weight: 700;">:تاريخ التعيين</label>
+                    <input asp-for="@Model.userDto.Date" style="font-size:large;" type="date" id="Date" class=" col" dir="rtl">
+                    <small>error</small>
+                </div>
+            </div>
+            <button onclick="checkInputs();"  type="button" id="login-button" class="btn" style="font-weight: 800;">إضافة</button>
+            <button style="display:none;" id="AddUser" asp-controller="Maneger" asp-action="AddUser"></button>
+        </div>
+    </div>
+</form>
+
+
+<script src="~/js/jquery-3.2.1.min.js"></script>
+<script src="~/js/Upload.js"></script>
+<script src="~/js/Validation/AddUserValidation.js"></script>
+

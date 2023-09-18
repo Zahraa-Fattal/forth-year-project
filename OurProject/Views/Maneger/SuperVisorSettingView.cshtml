@@ -1,0 +1,150 @@
+﻿@model OurProject.Dto.UserDto.UpdateSuperVisorDto
+@{
+    ViewData["Title"] = "SuperVisorSettingView";
+    Layout = "~/Views/Shared/Maneger/SuperVisorSetting_Layout.cshtml";
+}
+@**class="admin" style="height: 100%;*@
+
+<h1 class="text-center" style="color: #000133; padding-top: 3%;">عرض معلومات المشرفين وتعديلها</h1>
+<div class="mainTable table-responsive">
+    <table class="table" id="table" border="1" dir="rtl" style="font-weight: 600;">
+        <thead>
+            <tr>
+                <th style="width: 5rem; height: 3rem;">#</th>
+                <th style="width: 8rem; height: 3rem;">اسم المشرف</th>
+                <th style="width: 8rem; height: 3rem;"> اسم الوحدة</th>
+                <th style="width: 8rem; height: 3rem;">تاريخ  تعينه</th>
+                <th style="width: 8rem; height: 3rem;">رقم هاتفه</th>
+                <th style="width: 8rem; height: 3rem;"></th>
+                <th style="width: 8rem; height: 3rem;"></th>
+            </tr>
+        </thead>
+        <tbody>
+          
+            @foreach (var item in Model.getSuperVisorInfos)
+            {
+
+                int i=item.SuperVisorId;
+                string modalUpdateTarget = "exampleModalCenter" + i;
+                string modalDeleteTarget = "exampleModal" + i;
+                string modalDeleteErrorTarget = "exampleerrorModal" + i;
+                string nameValidate = "name" + i;
+                string phoneValidate = "phoneNumber" + i;
+                <tr style="color:#000133; height: 3rem;">
+                    <td>@item.SuperVisorId</td>
+                    <td>@item.SuperVisorName</td>
+                    <td>@item.unitName</td>
+                    <td>@item.Date.ToShortDateString()</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>
+                        <!-- Button trigger modal -->
+                        <button type="button" class=" button-2" data-toggle="modal" data-target="#@modalUpdateTarget">
+                            تعديل
+                        </button>
+
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="@modalUpdateTarget" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+
+
+
+                                    <div class="login-box">
+                                        <h2>تعديل بيانات المشرف</h2>
+                                        <form id="form">
+                                            <div class="user-box ">
+                                                <div class="big">
+                                                    <input type="hidden" asp-for="@Model.UserId" value="@item.SuperVisorId" />
+                                                    <input  value="@item.SuperVisorName" asp-for="@Model.UserDto.Name" id="@nameValidate" style="color: #1a5086;" type="text" dir="rtl" autocomplete="off">
+                                                    <label asp-for="@item.SuperVisorName" style="color: #1a5086;">اسم المشرف</label>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="user-box">
+                                                <div class="big">
+                                                    <input value="@item.PhoneNumber" asp-for="@Model.UserDto.PhoneNumber" id="@phoneValidate" style="color: #1a5086;" type="number" dir="rtl" autocomplete="off">
+                                                    <label asp-for="@item.PhoneNumber" style="color: #1a5086;">رقم هاتفه</label>
+                                                    <small>error</small>
+                                                </div>
+                                            </div>
+                                            <button onclick="return checkInputs('@nameValidate','@phoneValidate');"  style="border:none;border-radius:8px;" asp-controller="Maneger" asp-action="UpdateSuperVisor" type="submit">
+                                                <span></span>
+                                                <span></span>
+                                                <span></span>
+                                                <span></span>
+                                                حفظ التعديلات
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <button type="button" class="button-2" data-toggle="modal" data-target="#@modalDeleteTarget">
+                            حذف<i class='bx bxs-trash' style='color:#fa0606'></i>
+                        </button>
+
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="@modalDeleteTarget" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content" style="background-color: lightgray  !important;">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">حذف المشرفين</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        هل انت منأكد أنك تريد حذف المشرف @item.SuperVisorName
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(item.unitName))
+                                    {
+                                <div class="modal-footer" style="justify-content:space-around;">
+                                    <button type="button" class="button-2" data-dismiss="modal">لا</button>
+                                    <button data-toggle="modal" data-target="#@modalDeleteErrorTarget" type="button" class="button-2">نعم</button>
+
+                                    <div class="modal fade" id="@modalDeleteErrorTarget" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content" style="background-color: lightgray  !important;">
+                                                
+                                                <div class="modal-body">
+                                                    لا تستطيع حذف مشرف قائم على العمل
+                                                </div>
+                                                <div class="modal-footer"style="justify-content:center;">
+                                                    <button type="button" class="button-2" data-dismiss="modal">حسنا</button>
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                    }
+                                    else
+                                    {
+                                <form>
+                                    <div class="modal-footer"style="justify-content:space-around;">
+                                        <button type="button" class="button-2" data-dismiss="modal">لا</button>
+                                        <input type="hidden" value="@item.SuperVisorId" asp-for="@Model.UserId" />
+                                        <button asp-controller="Maneger" asp-action="DeleteSuperVisor" type="submit" class="button-2">نعم</button>
+                                    </div>
+                                </form>
+                                        
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+
